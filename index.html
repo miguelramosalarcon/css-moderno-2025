@@ -3,22 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Showcase de las características más modernas de CSS 2025: Container Queries, :has(), @supports y más">
+    <meta name="description" content="Showcase de CSS Moderno 2025 por Miguel Ramos Alarcon - Container Queries, :has(), @supports, color-mix() y más">
     <meta name="author" content="Miguel Ramos Alarcon">
-    <title>CSS Moderno 2025 - Showcase</title>
+    <meta name="keywords" content="CSS moderno, Container Queries, :has selector, color-mix, backdrop-filter, scroll timeline, desarrollo frontend">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="CSS Moderno 2025 - Miguel Ramos">
+    <meta property="og:description" content="Explora las características más avanzadas de CSS con demos interactivos">
+    <meta property="og:image" content="./assets/preview.png">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="CSS Moderno 2025 - Miguel Ramos">
+    <meta property="twitter:description" content="Explora las características más avanzadas de CSS con demos interactivos">
+    
+    <title>CSS Moderno 2025 - Miguel Ramos Alarcon</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/index.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232448A6' cx='50' cy='50' r='50'/><path fill='%23F5B841' d='M70 35L55 50L70 65M30 35L45 50L30 65'/></svg>">
 </head>
 <body>
     <!-- Header Principal -->
-    <header class="header" role="banner">
+    <header class="hero-header" role="banner">
         <div class="container">
-            <div class="header__content">
-                <h1 class="header__title">
-                    CSS Moderno 2025
-                    <span class="header__subtitle">Showcase de nuevas características</span>
-                </h1>
-                
+            <div class="hero-content">
+                <!-- Logo y Branding -->
+                <div class="hero-brand">
+                    <div class="brand-logo" aria-label="Logo Miguel Ramos">
+                        <svg width="60" height="60" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="50" fill="var(--primary-color)"/>
+                            <path d="M25 30 L45 50 L25 70 Z" fill="var(--brand-white)"/>
+                            <path d="M40 30 L60 50 L75 30 L75 45 L60 60 L75 75 L55 75 L40 60 L40 30 Z" fill="var(--secondary-color)"/>
+                        </svg>
+                    </div>
+                    <div class="brand-text">
+                        <h1 class="brand-title">Miguel Ramos Alarcon</h1>
+                        <p class="brand-subtitle">Full Stack Developer and Creative Designer</p>
+                    </div>
+                </div>
+
                 <!-- Toggle Dark/Light Mode -->
                 <button 
                     class="theme-toggle" 
@@ -36,187 +62,299 @@
                     </svg>
                 </button>
             </div>
+
+            <!-- Hero Content -->
+            <div class="hero-main">
+                <h2 class="hero-title">
+                    CSS Moderno 2025
+                    <span class="hero-highlight">Showcase Interactivo</span>
+                </h2>
+                <p class="hero-description">
+                    Explora las características más avanzadas del CSS moderno a través de demos 
+                    interactivos. Desde Container Queries hasta Scroll Timeline, descubre el 
+                    futuro del diseño web.
+                </p>
+                
+                <!-- Stats rápidas -->
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Características CSS</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100%</span>
+                        <span class="stat-label">Accesible</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2025</span>
+                        <span class="stat-label">Tecnología</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator" aria-hidden="true">
+            <span class="scroll-text">Explorar demos</span>
+            <svg class="scroll-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 13l3 3 7-7"/>
+                <path d="M7 7l3 3 7-7"/>
+            </svg>
         </div>
     </header>
 
-    <!-- Contenido Principal -->
-    <main class="main" role="main">
+    <!-- Navegación de Demos -->
+    <main class="main-demos" role="main">
         <div class="container">
-            
-            <!-- Sección 1: Container Queries -->
-            <section class="demo-section" aria-labelledby="container-queries-title">
-                <h2 id="container-queries-title" class="demo-section__title">
-                    1. Container Queries - Responsive por Contenedor
-                </h2>
-                <p class="demo-section__description">
-                    Los elementos responden al tamaño de su contenedor, no solo al viewport. 
-                    <strong>Redimensiona la ventana para ver la magia.</strong>
+            <section class="demos-intro">
+                <h2 class="section-title">Demos Interactivos</h2>
+                <p class="section-description">
+                    Cada demo está diseñado para mostrar una característica específica del CSS moderno. 
+                    Haz clic en cualquier card para explorar en detalle.
                 </p>
-                
-                <div class="container-demo">
-                    <div class="container-demo__wrapper">
-                        <article class="responsive-card" role="article">
-                            <div class="responsive-card__image" aria-label="Imagen decorativa"></div>
-                            <div class="responsive-card__content">
-                                <h3 class="responsive-card__title">Tipografía Fluida</h3>
-                                <p class="responsive-card__text">
-                                    Este texto se ajusta usando <code>clamp()</code> y cambia su layout 
-                                    según el ancho del contenedor padre, no del viewport.
-                                </p>
-                                <button class="responsive-card__button" type="button">
-                                    Leer más
-                                </button>
-                            </div>
-                        </article>
-                    </div>
-                </div>
             </section>
 
-            <!-- Sección 2: Selector :has() -->
-            <section class="demo-section" aria-labelledby="has-selector-title">
-                <h2 id="has-selector-title" class="demo-section__title">
-                    2. Selector :has() - CSS con Lógica
-                </h2>
-                <p class="demo-section__description">
-                    El "if" de CSS. El formulario cambia automáticamente cuando hay errores.
-                </p>
-                
-                <form class="smart-form" novalidate>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input 
-                            type="email" 
-                            id="email" 
-                            name="email"
-                            class="form-input"
-                            placeholder="tu@email.com"
-                            aria-describedby="email-error"
-                            required
-                        >
-                        <span id="email-error" class="form-error" role="alert" aria-live="polite">
-                            <!-- Error se muestra dinámicamente -->
-                        </span>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input 
-                            type="password" 
-                            id="password" 
-                            name="password"
-                            class="form-input"
-                            placeholder="••••••••"
-                            aria-describedby="password-error"
-                            required
-                        >
-                        <span id="password-error" class="form-error" role="alert" aria-live="polite">
-                            <!-- Error se muestra dinámicamente -->
-                        </span>
-                    </div>
-                    
-                    <button type="button" class="form-button" onclick="validateForm()">
-                        Validar Formulario
-                    </button>
-                </form>
-            </section>
-
-            <!-- Sección 3: @supports Query -->
-            <section class="demo-section" aria-labelledby="supports-title">
-                <h2 id="supports-title" class="demo-section__title">
-                    3. @supports - CSS Condicional
-                </h2>
-                <p class="demo-section__description">
-                    Layout que se adapta según las características soportadas por el navegador.
-                </p>
-                
-                <div class="adaptive-banner">
-                    <div class="adaptive-banner__content">
-                        <h3 class="adaptive-banner__title">Banner Inteligente</h3>
-                        <p class="adaptive-banner__text">
-                            Si tu navegador soporta CSS Grid, verás un layout moderno. 
-                            Si no, un diseño fallback elegante.
-                        </p>
-                        <button class="adaptive-banner__button" type="button">
-                            Explorar
-                        </button>
-                    </div>
-                    <div class="adaptive-banner__visual" aria-label="Elemento visual decorativo"></div>
-                </div>
-            </section>
-
-            <!-- Sección 4: color-mix() -->
-            <section class="demo-section" aria-labelledby="color-mix-title">
-                <h2 id="color-mix-title" class="demo-section__title">
-                    4. color-mix() - Paleta Dinámica
-                </h2>
-                <p class="demo-section__description">
-                    Mezcla colores directamente en CSS sin preprocesadores.
-                </p>
-                
-                <div class="color-palette" role="group" aria-label="Paleta de colores interactiva">
-                    <div class="color-box color-box--primary" 
-                         tabindex="0" 
-                         role="button"
-                         aria-label="Color primario - Hover para ver mezcla">
-                        <span class="color-box__label">Primario</span>
-                    </div>
-                    <div class="color-box color-box--secondary" 
-                         tabindex="0" 
-                         role="button"
-                         aria-label="Color secundario - Hover para ver mezcla">
-                        <span class="color-box__label">Secundario</span>
-                    </div>
-                    <div class="color-box color-box--accent" 
-                         tabindex="0" 
-                         role="button"
-                         aria-label="Color acento - Hover para ver mezcla">
-                        <span class="color-box__label">Acento</span>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Sección 5: Scroll Timeline -->
-            <section class="demo-section" aria-labelledby="scroll-timeline-title">
-                <h2 id="scroll-timeline-title" class="demo-section__title">
-                    5. Scroll Timeline - Animación Declarativa
-                </h2>
-                <p class="demo-section__description">
-                    Animaciones controladas por scroll sin JavaScript.
-                    <strong>Haz scroll para ver el efecto.</strong>
-                </p>
-                
-                <div class="scroll-demo">
-                    <div class="scroll-element" aria-label="Elemento que rota con el scroll">
-                        <div class="scroll-element__inner">
-                            <span class="scroll-element__text">CSS</span>
+            <!-- Grid de Demos -->
+            <div class="demos-grid" role="list">
+                <!-- Demo 1: Container Queries -->
+                <article class="demo-card" role="listitem">
+                    <div class="demo-card__visual">
+                        <div class="demo-preview demo-preview--container">
+                            <div class="preview-box preview-box--large"></div>
+                            <div class="preview-box preview-box--medium"></div>
+                            <div class="preview-box preview-box--small"></div>
                         </div>
                     </div>
-                    <p class="scroll-demo__hint">
-                        ↓ Sigue haciendo scroll ↓
-                    </p>
-                </div>
-            </section>
-
-            <!-- Sección 6: Backdrop Filter -->
-            <section class="demo-section" aria-labelledby="backdrop-filter-title">
-                <h2 id="backdrop-filter-title" class="demo-section__title">
-                    6. Backdrop Filter - Glassmorphism
-                </h2>
-                <p class="demo-section__description">
-                    Efectos de cristal y blur modernos para interfaces elegantes.
-                </p>
-                
-                <div class="glass-demo">
-                    <div class="glass-demo__background" aria-hidden="true"></div>
-                    <div class="glass-card" role="dialog" aria-labelledby="glass-card-title">
-                        <h3 id="glass-card-title" class="glass-card__title">Glassmorphism</h3>
-                        <p class="glass-card__text">
-                            Card con efecto de cristal usando backdrop-filter. 
-                            Perfecto para overlays y modales modernos.
+                    <div class="demo-card__content">
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">Container Queries</h3>
+                            <span class="demo-card__badge">Nuevo</span>
+                        </div>
+                        <p class="demo-card__description">
+                            Diseño responsive basado en el contenedor padre, no en el viewport. 
+                            La revolución del responsive design.
                         </p>
-                        <button class="glass-card__button" type="button">
-                            ✨ Interactuar
-                        </button>
+                        <div class="demo-card__tech">
+                            <span class="tech-tag">@container</span>
+                            <span class="tech-tag">clamp()</span>
+                            <span class="tech-tag">cqw</span>
+                        </div>
+                    </div>
+                    <a href="demos/container-queries.html" 
+                       class="demo-card__link"
+                       aria-label="Ver demo de Container Queries">
+                        <span class="demo-card__cta">Explorar Demo</span>
+                        <svg class="demo-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Demo 2: :has() Selector -->
+                <article class="demo-card" role="listitem">
+                    <div class="demo-card__visual">
+                        <div class="demo-preview demo-preview--has">
+                            <div class="preview-form">
+                                <div class="preview-input"></div>
+                                <div class="preview-input preview-input--error"></div>
+                                <div class="preview-button"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-card__content">
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">Selector :has()</h3>
+                            <span class="demo-card__badge">Potente</span>
+                        </div>
+                        <p class="demo-card__description">
+                            El "if" de CSS. Formularios inteligentes que cambian según su contenido. 
+                            Lógica condicional pura en CSS.
+                        </p>
+                        <div class="demo-card__tech">
+                            <span class="tech-tag">:has()</span>
+                            <span class="tech-tag">:valid</span>
+                            <span class="tech-tag">:focus</span>
+                        </div>
+                    </div>
+                    <a href="demos/has-selector.html" 
+                       class="demo-card__link"
+                       aria-label="Ver demo del selector :has()">
+                        <span class="demo-card__cta">Explorar Demo</span>
+                        <svg class="demo-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Demo 3: @supports Query -->
+                <article class="demo-card" role="listitem">
+                    <div class="demo-card__visual">
+                        <div class="demo-preview demo-preview--supports">
+                            <div class="preview-grid">
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
+                                <div class="grid-item"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="demo-card__content">
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">@supports Query</h3>
+                            <span class="demo-card__badge">Inteligente</span>
+                        </div>
+                        <p class="demo-card__description">
+                            CSS condicional que se adapta según las características soportadas. 
+                            Fallbacks elegantes automáticos.
+                        </p>
+                        <div class="demo-card__tech">
+                            <span class="tech-tag">@supports</span>
+                            <span class="tech-tag">feature queries</span>
+                            <span class="tech-tag">fallback</span>
+                        </div>
+                    </div>
+                    <a href="demos/supports-query.html" 
+                       class="demo-card__link"
+                       aria-label="Ver demo de @supports query">
+                        <span class="demo-card__cta">Explorar Demo</span>
+                        <svg class="demo-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Demo 4: color-mix() -->
+                <article class="demo-card" role="listitem">
+                    <div class="demo-card__visual">
+                        <div class="demo-preview demo-preview--color">
+                            <div class="color-circle color-circle--1"></div>
+                            <div class="color-circle color-circle--2"></div>
+                            <div class="color-circle color-circle--3"></div>
+                        </div>
+                    </div>
+                    <div class="demo-card__content">
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">color-mix()</h3>
+                            <span class="demo-card__badge">Creativo</span>
+                        </div>
+                        <p class="demo-card__description">
+                            Mezcla colores directamente en CSS. Paletas dinámicas sin preprocesadores. 
+                            Efectos de color en tiempo real.
+                        </p>
+                        <div class="demo-card__tech">
+                            <span class="tech-tag">color-mix()</span>
+                            <span class="tech-tag">oklch()</span>
+                            <span class="tech-tag">dynamic colors</span>
+                        </div>
+                    </div>
+                    <a href="demos/color-mix.html" 
+                       class="demo-card__link"
+                       aria-label="Ver demo de color-mix()">
+                        <span class="demo-card__cta">Explorar Demo</span>
+                        <svg class="demo-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Demo 5: Scroll Timeline -->
+                <article class="demo-card" role="listitem">
+                    <div class="demo-card__visual">
+                        <div class="demo-preview demo-preview--scroll">
+                            <div class="scroll-track">
+                                <div class="scroll-thumb"></div>
+                            </div>
+                            <div class="rotating-element"></div>
+                        </div>
+                    </div>
+                    <div class="demo-card__content">
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">Scroll Timeline</h3>
+                            <span class="demo-card__badge">Animado</span>
+                        </div>
+                        <p class="demo-card__description">
+                            Animaciones controladas por scroll sin JavaScript. 
+                            Experiencias narrativas fluidas y declarativas.
+                        </p>
+                        <div class="demo-card__tech">
+                            <span class="tech-tag">@scroll-timeline</span>
+                            <span class="tech-tag">animation-timeline</span>
+                            <span class="tech-tag">scroll-driven</span>
+                        </div>
+                    </div>
+                    <a href="demos/scroll-timeline.html" 
+                       class="demo-card__link"
+                       aria-label="Ver demo de Scroll Timeline">
+                        <span class="demo-card__cta">Explorar Demo</span>
+                        <svg class="demo-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                        </svg>
+                    </a>
+                </article>
+
+                <!-- Demo 6: Backdrop Filter -->
+                <article class="demo-card" role="listitem">
+                    <div class="demo-card__visual">
+                        <div class="demo-preview demo-preview--glass">
+                            <div class="glass-bg"></div>
+                            <div class="glass-overlay"></div>
+                        </div>
+                    </div>
+                    <div class="demo-card__content">
+                        <div class="demo-card__header">
+                            <h3 class="demo-card__title">Backdrop Filter</h3>
+                            <span class="demo-card__badge">Elegante</span>
+                        </div>
+                        <p class="demo-card__description">
+                            Efectos de cristal y blur para interfaces modernas. 
+                            Glassmorphism y overlays sofisticados.
+                        </p>
+                        <div class="demo-card__tech">
+                            <span class="tech-tag">backdrop-filter</span>
+                            <span class="tech-tag">blur()</span>
+                            <span class="tech-tag">glassmorphism</span>
+                        </div>
+                    </div>
+                    <a href="demos/backdrop-filter.html" 
+                       class="demo-card__link"
+                       aria-label="Ver demo de Backdrop Filter">
+                        <span class="demo-card__cta">Explorar Demo</span>
+                        <svg class="demo-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M7 17l9.2-9.2M17 17V7H7"/>
+                        </svg>
+                    </a>
+                </article>
+            </div>
+
+            <!-- Call to Action -->
+            <section class="cta-section">
+                <div class="cta-content">
+                    <h2 class="cta-title">¿Listo para explorar el futuro del CSS?</h2>
+                    <p class="cta-description">
+                        Cada demo incluye código comentado, explicaciones detalladas y ejemplos prácticos. 
+                        Perfecto para desarrolladores que quieren estar a la vanguardia.
+                    </p>
+                    <div class="cta-actions">
+                        <a href="https://github.com/miguelramosalarcon/css-moderno-2025" 
+                           class="cta-button cta-button--primary"
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                            </svg>
+                            Ver en GitHub
+                        </a>
+                        <a href="https://linkedin.com/in/miguelramosalarcon" 
+                           class="cta-button cta-button--secondary"
+                           target="_blank" 
+                           rel="noopener noreferrer">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                <rect x="2" y="9" width="4" height="12"/>
+                                <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                            Conectar en LinkedIn
+                        </a>
                     </div>
                 </div>
             </section>
@@ -227,16 +365,29 @@
     <footer class="footer" role="contentinfo">
         <div class="container">
             <div class="footer__content">
-                <p class="footer__text">
-                    Desarrollado por 
-                    <strong class="footer__author">Miguel Ramos Alarcon</strong>
-                </p>
-                <p class="footer__links">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="50" fill="var(--primary-color)"/>
+                            <path d="M25 30 L45 50 L25 70 Z" fill="var(--brand-white)"/>
+                            <path d="M40 30 L60 50 L75 30 L75 45 L60 60 L75 75 L55 75 L40 60 L40 30 Z" fill="var(--secondary-color)"/>
+                        </svg>
+                    </div>
+                    <div class="footer__info">
+                        <p class="footer__text">
+                            Desarrollado con CSS moderno por 
+                            <strong class="footer__author">Miguel Ramos Alarcon</strong>
+                        </p>
+                        <p class="footer__subtitle">Transformando ideas en experiencias digitales excepcionales</p>
+                    </div>
+                </div>
+                
+                <div class="footer__links">
                     <a href="https://github.com/miguelramosalarcon" 
                        class="footer__link" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       aria-label="Ver perfil de GitHub de Miguel Ramos Alarcon">
+                       aria-label="GitHub de Miguel Ramos Alarcon">
                         GitHub
                     </a>
                     <span class="footer__separator" aria-hidden="true">•</span>
@@ -244,60 +395,16 @@
                        class="footer__link" 
                        target="_blank" 
                        rel="noopener noreferrer"
-                       aria-label="Ver perfil de LinkedIn de Miguel Ramos Alarcon">
+                       aria-label="LinkedIn de Miguel Ramos Alarcon">
                         LinkedIn
                     </a>
-                </p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Toggle tema oscuro/claro
-        const themeToggle = document.querySelector('.theme-toggle');
-        const html = document.documentElement;
-        
-        // Detectar preferencia inicial
-        const savedTheme = localStorage.getItem('theme');
-        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-        
-        html.setAttribute('data-theme', initialTheme);
-        themeToggle.setAttribute('aria-pressed', initialTheme === 'dark');
-        
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            
-            html.setAttribute('data-theme', newTheme);
-            themeToggle.setAttribute('aria-pressed', newTheme === 'dark');
-            localStorage.setItem('theme', newTheme);
-        });
-        
-        // Validación del formulario (demo)
-        function validateForm() {
-            const emailInput = document.getElementById('email');
-            const passwordInput = document.getElementById('password');
-            const emailError = document.getElementById('email-error');
-            const passwordError = document.getElementById('password-error');
-            
-            // Limpiar errores previos
-            emailInput.classList.remove('error');
-            passwordInput.classList.remove('error');
-            emailError.textContent = '';
-            passwordError.textContent = '';
-            
-            // Simular validación
-            if (!emailInput.value || !emailInput.value.includes('@')) {
-                emailInput.classList.add('error');
-                emailError.textContent = 'Por favor ingresa un email válido';
-            }
-            
-            if (!passwordInput.value || passwordInput.value.length < 6) {
-                passwordInput.classList.add('error');
-                passwordError.textContent = 'La contraseña debe tener al menos 6 caracteres';
-            }
-        }
-    </script>
+    <script src="scripts/index.js"></script>
+    <script src="scripts/theme-toggle.js"></script>
+    <script src="scripts/utils.js"></script>
 </body>
 </html>

@@ -5,10 +5,11 @@
 /* Variables CSS Personalizadas (Custom Properties) */
 :root {
   /* Colores principales */
-  --primary-color: #6366f1;
-  --primary-dark: #4f46e5;
-  --secondary-color: #f59e0b;
-  --accent-color: #ec4899;
+  --primary-color: #2448A6; 
+  --primary-dark: #1a3580;
+  --secondary-color: #F5B841;
+  --accent-color: #F5B841;
+  --brand-white: #FFFFFF;
   
   /* Colores de sistema */
   --background: #ffffff;
@@ -65,17 +66,17 @@
 
 /* Tema oscuro */
 :root[data-theme="dark"] {
-  --background: #0f172a;
-  --surface: #1e293b;
-  --text-primary: #f1f5f9;
+  --background: #0B1426;
+  --surface: #1A2332;
+  --text-primary: #F8FAFC;
   --text-secondary: #cbd5e1;
   --text-muted: #64748b;
   --border-color: #334155;
   
   /* Ajustes de colores para dark mode */
-  --primary-color: #818cf8;
+  --primary-color: #2448A6;
   --secondary-color: #fbbf24;
-  --accent-color: #f472b6;
+  --accent-color: #1a3580;
 }
 
 /* Detección automática de preferencia del sistema */

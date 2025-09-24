@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Showcase de las características más modernas de CSS 2025: Container Queries, :has(), @supports y más">
+    <meta name="author" content="Miguel Ramos Alarcon">
+    <title>CSS Moderno 2025 - Showcase</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+    <!-- Header Principal -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header__content">
+                <h1 class="header__title">
+                    CSS Moderno 2025
+                    <span class="header__subtitle">Showcase de nuevas características</span>
+                </h1>
+                
+                <!-- Toggle Dark/Light Mode -->
+                <button 
+                    class="theme-toggle" 
+                    type="button"
+                    aria-label="Cambiar tema entre claro y oscuro"
+                    aria-pressed="false"
+                    title="Cambiar tema"
+                >
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal -->
+    <main class="main" role="main">
+        <div class="container">
+            
+            <!-- Sección 1: Container Queries -->
+            <section class="demo-section" aria-labelledby="container-queries-title">
+                <h2 id="container-queries-title" class="demo-section__title">
+                    1. Container Queries - Responsive por Contenedor
+                </h2>
+                <p class="demo-section__description">
+                    Los elementos responden al tamaño de su contenedor, no solo al viewport. 
+                    <strong>Redimensiona la ventana para ver la magia.</strong>
+                </p>
+                
+                <div class="container-demo">
+                    <div class="container-demo__wrapper">
+                        <article class="responsive-card" role="article">
+                            <div class="responsive-card__image" aria-label="Imagen decorativa"></div>
+                            <div class="responsive-card__content">
+                                <h3 class="responsive-card__title">Tipografía Fluida</h3>
+                                <p class="responsive-card__text">
+                                    Este texto se ajusta usando <code>clamp()</code> y cambia su layout 
+                                    según el ancho del contenedor padre, no del viewport.
+                                </p>
+                                <button class="responsive-card__button" type="button">
+                                    Leer más
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 2: Selector :has() -->
+            <section class="demo-section" aria-labelledby="has-selector-title">
+                <h2 id="has-selector-title" class="demo-section__title">
+                    2. Selector :has() - CSS con Lógica
+                </h2>
+                <p class="demo-section__description">
+                    El "if" de CSS. El formulario cambia automáticamente cuando hay errores.
+                </p>
+                
+                <form class="smart-form" novalidate>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email"
+                            class="form-input"
+                            placeholder="tu@email.com"
+                            aria-describedby="email-error"
+                            required
+                        >
+                        <span id="email-error" class="form-error" role="alert" aria-live="polite">
+                            <!-- Error se muestra dinámicamente -->
+                        </span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input 
+                            type="password" 
+                            id="password" 
+                            name="password"
+                            class="form-input"
+                            placeholder="••••••••"
+                            aria-describedby="password-error"
+                            required
+                        >
+                        <span id="password-error" class="form-error" role="alert" aria-live="polite">
+                            <!-- Error se muestra dinámicamente -->
+                        </span>
+                    </div>
+                    
+                    <button type="button" class="form-button" onclick="validateForm()">
+                        Validar Formulario
+                    </button>
+                </form>
+            </section>
+
+            <!-- Sección 3: @supports Query -->
+            <section class="demo-section" aria-labelledby="supports-title">
+                <h2 id="supports-title" class="demo-section__title">
+                    3. @supports - CSS Condicional
+                </h2>
+                <p class="demo-section__description">
+                    Layout que se adapta según las características soportadas por el navegador.
+                </p>
+                
+                <div class="adaptive-banner">
+                    <div class="adaptive-banner__content">
+                        <h3 class="adaptive-banner__title">Banner Inteligente</h3>
+                        <p class="adaptive-banner__text">
+                            Si tu navegador soporta CSS Grid, verás un layout moderno. 
+                            Si no, un diseño fallback elegante.
+                        </p>
+                        <button class="adaptive-banner__button" type="button">
+                            Explorar
+                        </button>
+                    </div>
+                    <div class="adaptive-banner__visual" aria-label="Elemento visual decorativo"></div>
+                </div>
+            </section>
+
+            <!-- Sección 4: color-mix() -->
+            <section class="demo-section" aria-labelledby="color-mix-title">
+                <h2 id="color-mix-title" class="demo-section__title">
+                    4. color-mix() - Paleta Dinámica
+                </h2>
+                <p class="demo-section__description">
+                    Mezcla colores directamente en CSS sin preprocesadores.
+                </p>
+                
+                <div class="color-palette" role="group" aria-label="Paleta de colores interactiva">
+                    <div class="color-box color-box--primary" 
+                         tabindex="0" 
+                         role="button"
+                         aria-label="Color primario - Hover para ver mezcla">
+                        <span class="color-box__label">Primario</span>
+                    </div>
+                    <div class="color-box color-box--secondary" 
+                         tabindex="0" 
+                         role="button"
+                         aria-label="Color secundario - Hover para ver mezcla">
+                        <span class="color-box__label">Secundario</span>
+                    </div>
+                    <div class="color-box color-box--accent" 
+                         tabindex="0" 
+                         role="button"
+                         aria-label="Color acento - Hover para ver mezcla">
+                        <span class="color-box__label">Acento</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Sección 5: Scroll Timeline -->
+            <section class="demo-section" aria-labelledby="scroll-timeline-title">
+                <h2 id="scroll-timeline-title" class="demo-section__title">
+                    5. Scroll Timeline - Animación Declarativa
+                </h2>
+                <p class="demo-section__description">
+                    Animaciones controladas por scroll sin JavaScript.
+                    <strong>Haz scroll para ver el efecto.</strong>
+                </p>
+                
+                <div class="scroll-demo">
+                    <div class="scroll-element" aria-label="Elemento que rota con el scroll">
+                        <div class="scroll-element__inner">
+                            <span class="scroll-element__text">CSS</span>
+                        </div>
+                    </div>
+                    <p class="scroll-demo__hint">
+                        ↓ Sigue haciendo scroll ↓
+                    </p>
+                </div>
+            </section>
+
+            <!-- Sección 6: Backdrop Filter -->
+            <section class="demo-section" aria-labelledby="backdrop-filter-title">
+                <h2 id="backdrop-filter-title" class="demo-section__title">
+                    6. Backdrop Filter - Glassmorphism
+                </h2>
+                <p class="demo-section__description">
+                    Efectos de cristal y blur modernos para interfaces elegantes.
+                </p>
+                
+                <div class="glass-demo">
+                    <div class="glass-demo__background" aria-hidden="true"></div>
+                    <div class="glass-card" role="dialog" aria-labelledby="glass-card-title">
+                        <h3 id="glass-card-title" class="glass-card__title">Glassmorphism</h3>
+                        <p class="glass-card__text">
+                            Card con efecto de cristal usando backdrop-filter. 
+                            Perfecto para overlays y modales modernos.
+                        </p>
+                        <button class="glass-card__button" type="button">
+                            ✨ Interactuar
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <p class="footer__text">
+                    Desarrollado por 
+                    <strong class="footer__author">Miguel Ramos Alarcon</strong>
+                </p>
+                <p class="footer__links">
+                    <a href="https://github.com/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Ver perfil de GitHub de Miguel Ramos Alarcon">
+                        GitHub
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="https://linkedin.com/in/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Ver perfil de LinkedIn de Miguel Ramos Alarcon">
+                        LinkedIn
+                    </a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle tema oscuro/claro
+        const themeToggle = document.querySelector('.theme-toggle');
+        const html = document.documentElement;
+        
+        // Detectar preferencia inicial
+        const savedTheme = localStorage.getItem('theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+        
+        html.setAttribute('data-theme', initialTheme);
+        themeToggle.setAttribute('aria-pressed', initialTheme === 'dark');
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            themeToggle.setAttribute('aria-pressed', newTheme === 'dark');
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Validación del formulario (demo)
+        function validateForm() {
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+            const emailError = document.getElementById('email-error');
+            const passwordError = document.getElementById('password-error');
+            
+            // Limpiar errores previos
+            emailInput.classList.remove('error');
+            passwordInput.classList.remove('error');
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            
+            // Simular validación
+            if (!emailInput.value || !emailInput.value.includes('@')) {
+                emailInput.classList.add('error');
+                emailError.textContent = 'Por favor ingresa un email válido';
+            }
+            
+            if (!passwordInput.value || passwordInput.value.length < 6) {
+                passwordInput.classList.add('error');
+                passwordError.textContent = 'La contraseña debe tener al menos 6 caracteres';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demo interactivo de Container Queries - CSS Moderno 2025 por Miguel Ramos Alarcon">
+    <meta name="author" content="Miguel Ramos Alarcon">
+    
+    <title>Container Queries - CSS Moderno 2025 | Miguel Ramos</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/container-queries.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232448A6' cx='50' cy='50' r='50'/><path fill='%23F5B841' d='M70 35L55 50L70 65M30 35L45 50L30 65'/></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="demo-header" role="banner">
+        <div class="container">
+            <nav class="demo-nav" role="navigation">
+                <a href="../index.html" class="back-link" aria-label="Volver al índice principal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Volver al Índice
+                </a>
+                
+                <!-- Branding -->
+                <div class="header-brand">
+                    <div class="brand-logo-small" aria-label="Logo Miguel Ramos">
+                        <svg width="32" height="32" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="50" fill="var(--primary-color)"/>
+                            <path d="M25 30 L45 50 L25 70 Z" fill="var(--brand-white)"/>
+                            <path d="M40 30 L60 50 L75 30 L75 45 L60 60 L75 75 L55 75 L40 60 L40 30 Z" fill="var(--secondary-color)"/>
+                        </svg>
+                    </div>
+                    <span class="brand-name">Miguel Ramos</span>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <button 
+                    class="theme-toggle" 
+                    type="button"
+                    aria-label="Cambiar tema entre claro y oscuro"
+                    aria-pressed="false"
+                    title="Cambiar tema"
+                >
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="demo-main" role="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="demo-hero">
+                <div class="demo-hero__badge">
+                    <span class="badge-text">CSS Moderno 2025</span>
+                    <span class="badge-tag">Nuevo</span>
+                </div>
+                
+                <h1 class="demo-hero__title">
+                    Container Queries
+                    <span class="title-highlight">La Revolución del Responsive</span>
+                </h1>
+                
+                <p class="demo-hero__description">
+                    Los Container Queries permiten que los elementos respondan al tamaño de su contenedor padre, 
+                    no solo al viewport. Esto significa diseños verdaderamente modulares y componentes 
+                    que se adaptan a cualquier contexto.
+                </p>
+                
+                <div class="demo-hero__features">
+                    <div class="feature-item">
+                        <div class="feature-icon">📦</div>
+                        <div class="feature-text">
+                            <strong>Contenedor-based</strong>
+                            <span>Responsive por contenedor</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📏</div>
+                        <div class="feature-text">
+                            <strong>Tipografía Fluida</strong>
+                            <span>clamp() + container units</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🔄</div>
+                        <div class="feature-text">
+                            <strong>Modular</strong>
+                            <span>Componentes reutilizables</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Demo -->
+            <section class="interactive-section" aria-labelledby="demo-title">
+                <h2 id="demo-title" class="section-title">
+                    Demo en Vivo
+                    <span class="section-subtitle">Controla la animación automática</span>
+                </h2>
+
+                <!-- Control de animación -->
+                <div class="animation-controls" role="group" aria-label="Controles de animación">
+                    <button 
+                        type="button" 
+                        class="animation-toggle active" 
+                        id="animationToggle"
+                        aria-pressed="true"
+                        title="Pausar/reanudar animación automática"
+                    >
+                        <svg class="animation-icon animation-icon--play" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polygon points="5,3 19,12 5,21"/>
+                        </svg>
+                        <svg class="animation-icon animation-icon--pause" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="6" y="4" width="4" height="16"/>
+                            <rect x="14" y="4" width="4" height="16"/>
+                        </svg>
+                        <span class="animation-text">Pausar Animación</span>
+                    </button>
+                    
+                    <div class="animation-info">
+                        <span class="info-text">La animación cambia el tamaño del contenedor cada 2 segundos</span>
+                        <span class="info-status" id="animationStatus">▶️ Ejecutándose</span>
+                    </div>
+                </div>
+
+                <!-- Demo Container con animación -->
+                <div class="demo-showcase">
+                    <div class="container-wrapper">
+                        <article class="responsive-card" role="article">
+                            <!-- Card Image -->
+                            <div class="card-image" aria-label="Imagen decorativa con gradiente animado">
+                                <div class="image-overlay">
+                                    <div class="image-icon">🎨</div>
+                                    <span class="image-text">Container Query</span>
+                                </div>
+                            </div>
+                            
+                            <!-- Card Content -->
+                            <div class="card-content">
+                                <header class="card-header">
+                                    <h3 class="card-title">Diseño Inteligente</h3>
+                                    <div class="card-badges">
+                                        <span class="card-badge">CSS 2025</span>
+                                    </div>
+                                </header>
+                                
+                                <div class="card-body">
+                                    <p class="card-description">
+                                        Este componente cambia automáticamente su layout, tipografía y 
+                                        elementos visuales basándose en el ancho de su contenedor padre, 
+                                        no del viewport. La magia del responsive moderno.
+                                    </p>
+                                    
+                                    <!-- Stats que cambian según container -->
+                                    <div class="card-stats">
+                                        <div class="stat">
+                                            <span class="stat-value">@container</span>
+                                            <span class="stat-label">Query</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-value">clamp()</span>
+                                            <span class="stat-label">Fluido</span>
+                                        </div>
+                                        <div class="stat">
+                                            <span class="stat-value">cqw</span>
+                                            <span class="stat-label">Units</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Tech tags -->
+                                    <div class="card-tech">
+                                        <span class="tech-tag">@container</span>
+                                        <span class="tech-tag">inline-size</span>
+                                        <span class="tech-tag">container-type</span>
+                                    </div>
+                                </div>
+                                
+                                <!-- Card Actions -->
+                                <div class="card-actions">
+                                    <button class="card-button card-button--primary" type="button">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                                        </svg>
+                                        Ver Código
+                                    </button>
+                                    <button class="card-button card-button--secondary" type="button">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M21 12H9"/>
+                                        </svg>
+                                        Siguiente Demo
+                                    </button>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Examples -->
+            <section class="code-section" aria-labelledby="code-title">
+                <h2 id="code-title" class="section-title">
+                    ¿Cómo Funciona?
+                    <span class="section-subtitle">El código detrás de la magia</span>
+                </h2>
+
+                <div class="code-examples">
+                    <!-- Container Query CSS -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">1. Definir el Container Query Context</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>.container-wrapper {
+  /* Definir contexto de container query */
+  container-type: inline-size;
+  container-name: card-container;
+  
+  /* Animación automática del tamaño */
+  animation: containerResize 8s ease-in-out infinite;
+}
+
+@keyframes containerResize {
+  0%, 100% { max-width: 100%; }
+  25%      { max-width: 600px; }
+  50%      { max-width: 400px; }
+  75%      { max-width: 300px; }
+}</code></pre>
+                    </div>
+
+                    <!-- Responsive Breakpoints -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">2. Container Query Breakpoints</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Layout vertical por defecto (mobile-first) */
+.responsive-card {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cuando el container es ≥ 600px: layout horizontal */
+@container card-container (min-width: 600px) {
+  .responsive-card {
+    flex-direction: row;
+  }
+  
+  .card-image {
+    width: 40%;
+  }
+  
+  .card-content {
+    width: 60%;
+  }
+}
+
+/* Cuando el container es ≥ 800px: versión mejorada */
+@container card-container (min-width: 800px) {
+  .card-title {
+    font-size: clamp(1.5rem, 4cqw, 2.5rem);
+  }
+}</code></pre>
+                    </div>
+
+                    <!-- Fluid Typography -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">3. Tipografía Fluida con Container Units</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>.card-title {
+  /* Tipografía que escala según el container */
+  font-size: clamp(1.25rem, 3cqw + 1rem, 2rem);
+}
+
+.card-description {
+  /* cqw = container query width units */
+  font-size: clamp(0.875rem, 2cqw + 0.75rem, 1.125rem);
+}
+
+/* cqw es relativo al ancho del contenedor, no del viewport */</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Advantages -->
+            <section class="advantages-section">
+                <h2 class="section-title">
+                    Ventajas de Container Queries
+                    <span class="section-subtitle">¿Por qué son el futuro del responsive design?</span>
+                </h2>
+
+                <div class="advantages-grid">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">⚙️</div>
+                        <h3 class="advantage-title">Componentes Modulares</h3>
+                        <p class="advantage-description">
+                            Los componentes se adaptan a cualquier contexto sin importar dónde se usen. 
+                            Verdadera reutilización de código.
+                        </p>
+                    </div>
+                    
+                    <div class="advantage-card">
+                        <div class="advantage-icon">📐</div>
+                        <h3 class="advantage-title">Precisión de Layout</h3>
+                        <p class="advantage-description">
+                            No más media queries globales. Cada componente controla su propio 
+                            comportamiento responsive.
+                        </p>
+                    </div>
+                    
+                    <div class="advantage-card">
+                        <div class="advantage-icon">⚡</div>
+                        <h3 class="advantage-title">Performance</h3>
+                        <p class="advantage-description">
+                            Menos código CSS, menos complejidad. Los cambios se aplican solo cuando 
+                            el contenedor cambia de tamaño.
+                        </p>
+                    </div>
+                    
+                    <div class="advantage-card">
+                        <div class="advantage-icon">🎯</div>
+                        <h3 class="advantage-title">Mantenimiento</h3>
+                        <p class="advantage-description">
+                            CSS más limpio y predecible. Cada componente encapsula sus propias 
+                            reglas responsive.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Browser Support -->
+            <section class="support-section">
+                <h2 class="section-title">
+                    Soporte de Navegadores
+                    <span class="section-subtitle">Container Queries en producción</span>
+                </h2>
+
+                <div class="browser-support">
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🌐</div>
+                        <div class="browser-info">
+                            <strong>Chrome</strong>
+                            <span>105+ ✅</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🦊</div>
+                        <div class="browser-info">
+                            <strong>Firefox</strong>
+                            <span>110+ ✅</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🧭</div>
+                        <div class="browser-info">
+                            <strong>Safari</strong>
+                            <span>16.0+ ✅</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--limited">
+                        <div class="browser-icon">🔷</div>
+                        <div class="browser-info">
+                            <strong>Edge</strong>
+                            <span>105+ ⚠️</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="support-fallback">
+                    <h3>Fallback para navegadores antiguos:</h3>
+                    <pre class="code-content"><code>@supports not (container-type: inline-size) {
+  /* Usar media queries tradicionales como fallback */
+  @media (min-width: 600px) {
+    .responsive-card {
+      flex-direction: row;
+    }
+  }
+}</code></pre>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="50" fill="var(--primary-color)"/>
+                            <path d="M25 30 L45 50 L25 70 Z" fill="var(--brand-white)"/>
+                            <path d="M40 30 L60 50 L75 30 L75 45 L60 60 L75 75 L55 75 L40 60 L40 30 Z" fill="var(--secondary-color)"/>
+                        </svg>
+                    </div>
+                    <div class="footer__info">
+                        <p class="footer__text">
+                            Desarrollado con CSS moderno por 
+                            <strong class="footer__author">Miguel Ramos Alarcon</strong>
+                        </p>
+                        <p class="footer__subtitle">Full Stack Developer & Creative Designer</p>
+                    </div>
+                </div>
+                
+                <div class="footer__links">
+                    <a href="https://github.com/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="GitHub de Miguel Ramos Alarcon">
+                        GitHub
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="https://linkedin.com/in/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="LinkedIn de Miguel Ramos Alarcon">
+                        LinkedIn
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="../index.html" 
+                       class="footer__link"
+                       aria-label="Volver al índice principal">
+                        Más Demos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../scripts/utils.js"></script>
+    <script src="../scripts/theme-toggle.js"></script>
+    <script src="../scripts/container-queries.js"></script>
+</body>
+</html>

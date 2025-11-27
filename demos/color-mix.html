@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demo interactivo de color-mix() - CSS Moderno 2025 por Miguel Ramos Alarcon">
+    <meta name="author" content="Miguel Ramos Alarcon">
+    
+    <title>color-mix() - CSS Moderno 2025 | Miguel Ramos</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/color-mix.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232448A6' cx='50' cy='50' r='50'/><path fill='%23F5B841' d='M70 35L55 50L70 65M30 35L45 50L30 65'/></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="demo-header" role="banner">
+        <div class="container">
+            <nav class="demo-nav" role="navigation">
+                <a href="../index.html" class="back-link" aria-label="Volver al índice principal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Volver al Índice
+                </a>
+                
+                <!-- Branding -->
+                <div class="header-brand">
+                    <div class="brand-logo" aria-label="Logo Miguel Ramos">
+                        <img 
+                            src="../assets/Logo_MRStudio.webp" 
+                            alt="Miguel Ramos - Full Stack Developer"
+                            width="60"
+                            height="60"
+                            loading="lazy"
+                        >
+                    </div>
+                    <span class="brand-name">Miguel Ramos</span>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <button 
+                    class="theme-toggle" 
+                    type="button"
+                    aria-label="Cambiar tema entre claro y oscuro"
+                    aria-pressed="false"
+                    title="Cambiar tema"
+                >
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="demo-main" role="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="demo-hero">
+                <div class="demo-hero__badge">
+                    <span class="badge-text">CSS Moderno 2025</span>
+                    <span class="badge-tag">Creativo</span>
+                </div>
+                
+                <h1 class="demo-hero__title">
+                    color-mix()
+                    <span class="title-highlight">Paletas Dinámicas Sin Preprocesadores</span>
+                </h1>
+                
+                <p class="demo-hero__description">
+                    color-mix() permite mezclar colores directamente en CSS, eliminando la necesidad de Sass o Less 
+                    para generar variaciones de color. Define dos colores base y genera automáticamente hover states, 
+                    backgrounds con opacidad, y sistemas de diseño completos.
+                </p>
+                
+                <div class="demo-hero__features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎨</div>
+                        <div class="feature-text">
+                            <strong>Mezcla Nativa</strong>
+                            <span>Sin preprocesadores</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-text">
+                            <strong>Tiempo Real</strong>
+                            <span>Cambios instantáneos</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🌈</div>
+                        <div class="feature-text">
+                            <strong>Espacios de Color</strong>
+                            <span>sRGB, OKLCH, HSL</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Playground -->
+            <section class="playground-section" aria-labelledby="playground-title">
+                <h2 id="playground-title" class="section-title">
+                    Playground Interactivo
+                    <span class="section-subtitle">Experimenta con color-mix() en tiempo real</span>
+                </h2>
+
+                <div class="playground-container">
+                    <!-- Controls Panel -->
+                    <div class="playground-controls">
+                        <h3 class="controls-title">Controles</h3>
+                        
+                        <!-- Color Pickers -->
+                        <div class="control-group">
+                            <label for="color1" class="control-label">
+                                <span class="label-text">Color 1</span>
+                                <span class="label-value" id="color1-value">#2448A6</span>
+                            </label>
+                            <div class="color-input-wrapper">
+                                <input 
+                                    type="color" 
+                                    id="color1" 
+                                    value="#2448A6"
+                                    class="color-input"
+                                    aria-label="Seleccionar primer color"
+                                >
+                                <input 
+                                    type="text" 
+                                    id="color1-hex"
+                                    value="#2448A6"
+                                    class="hex-input"
+                                    pattern="^#[0-9A-Fa-f]{6}$"
+                                    maxlength="7"
+                                    aria-label="Código hexadecimal del primer color"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label for="color2" class="control-label">
+                                <span class="label-text">Color 2</span>
+                                <span class="label-value" id="color2-value">#F5B841</span>
+                            </label>
+                            <div class="color-input-wrapper">
+                                <input 
+                                    type="color" 
+                                    id="color2" 
+                                    value="#F5B841"
+                                    class="color-input"
+                                    aria-label="Seleccionar segundo color"
+                                >
+                                <input 
+                                    type="text" 
+                                    id="color2-hex"
+                                    value="#F5B841"
+                                    class="hex-input"
+                                    pattern="^#[0-9A-Fa-f]{6}$"
+                                    maxlength="7"
+                                    aria-label="Código hexadecimal del segundo color"
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Mix Slider -->
+                        <div class="control-group">
+                            <label for="mixPercentage" class="control-label">
+                                <span class="label-text">Porcentaje de mezcla</span>
+                                <span class="label-value" id="mix-value">50%</span>
+                            </label>
+                            <input 
+                                type="range" 
+                                id="mixPercentage" 
+                                min="0" 
+                                max="100" 
+                                value="50"
+                                class="range-slider"
+                                aria-label="Ajustar porcentaje de mezcla"
+                            >
+                            <div class="slider-labels">
+                                <span>0% (Color 1)</span>
+                                <span>100% (Color 2)</span>
+                            </div>
+                        </div>
+
+                        <!-- Color Space Selector -->
+                        <div class="control-group">
+                            <label for="colorSpace" class="control-label">
+                                <span class="label-text">Espacio de color</span>
+                            </label>
+                            <select id="colorSpace" class="color-space-select" aria-label="Seleccionar espacio de color">
+                                <option value="srgb" selected>sRGB (Estándar web)</option>
+                                <option value="oklch">OKLCH (Perceptual)</option>
+                                <option value="hsl">HSL (Matiz/Saturación)</option>
+                            </select>
+                            <p class="color-space-info" id="colorSpaceInfo">
+                                Espacio de color estándar para la web
+                            </p>
+                        </div>
+
+                        <!-- Quick Presets -->
+                        <div class="control-group">
+                            <label class="control-label">
+                                <span class="label-text">Presets rápidos</span>
+                            </label>
+                            <div class="preset-buttons">
+                                <button type="button" class="preset-btn" data-preset="brand">
+                                    🎨 Tu Brand
+                                </button>
+                                <button type="button" class="preset-btn" data-preset="sunset">
+                                    🌅 Sunset
+                                </button>
+                                <button type="button" class="preset-btn" data-preset="ocean">
+                                    🌊 Ocean
+                                </button>
+                                <button type="button" class="preset-btn" data-preset="forest">
+                                    🌲 Forest
+                                </button>
+                                <button type="button" class="preset-btn" data-preset="random">
+                                    🎲 Aleatorio
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Generated CSS Code -->
+                        <div class="control-group">
+                            <label class="control-label">
+                                <span class="label-text">Código CSS generado</span>
+                                <button type="button" class="copy-code-btn" id="copyCssBtn" title="Copiar código">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                    </svg>
+                                </button>
+                            </label>
+                            <pre class="generated-code" id="generatedCss"><code>background: color-mix(in srgb, #2448A6 50%, #F5B841 50%);</code></pre>
+                        </div>
+                    </div>
+
+                    <!-- Live Preview -->
+                    <div class="playground-preview">
+                        <h3 class="preview-title">Vista Previa</h3>
+                        
+                        <!-- Color Circle -->
+                        <div class="color-preview">
+                            <div class="color-circle" id="colorCircle"></div>
+                            <div class="color-info">
+                                <div class="color-info-row">
+                                    <span class="info-label">HEX:</span>
+                                    <span class="info-value" id="resultHex">#8E7DF3</span>
+                                </div>
+                                <div class="color-info-row">
+                                    <span class="info-label">RGB:</span>
+                                    <span class="info-value" id="resultRgb">rgb(142, 125, 243)</span>
+                                </div>
+                                <div class="color-info-row">
+                                    <span class="info-label">HSL:</span>
+                                    <span class="info-value" id="resultHsl">hsl(249, 83%, 72%)</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Color Comparison -->
+                        <div class="color-comparison">
+                            <div class="comparison-item">
+                                <div class="comparison-swatch" id="color1Swatch"></div>
+                                <span class="comparison-label">Color 1</span>
+                            </div>
+                            <div class="comparison-arrow">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-swatch" id="mixedSwatch"></div>
+                                <span class="comparison-label">Mezcla</span>
+                            </div>
+                            <div class="comparison-arrow">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                                </svg>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-swatch" id="color2Swatch"></div>
+                                <span class="comparison-label">Color 2</span>
+                            </div>
+                        </div>
+
+                        <!-- Component Examples -->
+                        <div class="component-examples">
+                            <h4 class="examples-title">Aplicación en componentes</h4>
+                            
+                            <div class="example-buttons">
+                                <button class="example-btn example-btn--normal" id="exampleBtn">
+                                    Color Normal
+                                </button>
+                                <button class="example-btn example-btn--hover" id="exampleBtnHover">
+                                    Hover State
+                                </button>
+                                <button class="example-btn example-btn--active" id="exampleBtnActive">
+                                    Active State
+                                </button>
+                            </div>
+
+                            <div class="example-card" id="exampleCard">
+                                <div class="example-card-header">
+                                    Card con color-mix()
+                                </div>
+                                <div class="example-card-body">
+                                    El fondo usa color-mix() con transparencia
+                                </div>
+                            </div>
+
+                            <div class="example-badges">
+                                <span class="example-badge" id="exampleBadge1">Badge Solid</span>
+                                <span class="example-badge example-badge--light" id="exampleBadge2">Badge Light</span>
+                                <span class="example-badge example-badge--lighter" id="exampleBadge3">Badge Lighter</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Color Space Comparison -->
+            <section class="color-space-section" aria-labelledby="color-space-title">
+                <h2 id="color-space-title" class="section-title">
+                    Comparación de Espacios de Color
+                    <span class="section-subtitle">Mismo par de colores, diferentes resultados</span>
+                </h2>
+
+                <div class="color-space-grid">
+                    <div class="space-card">
+                        <div class="space-preview space-preview--srgb"></div>
+                        <h3 class="space-title">sRGB</h3>
+                        <p class="space-description">
+                            Espacio estándar para web. Mezcla en espacio RGB tradicional. 
+                            Mejor compatibilidad pero puede generar colores "apagados" en mezclas.
+                        </p>
+                        <code class="space-code">color-mix(in srgb, ...)</code>
+                    </div>
+
+                    <div class="space-card">
+                        <div class="space-preview space-preview--oklch"></div>
+                        <h3 class="space-title">OKLCH</h3>
+                        <p class="space-description">
+                            Perceptualmente uniforme. Los colores se mezclan de forma más natural 
+                            y predecible según cómo el ojo humano percibe el color.
+                        </p>
+                        <code class="space-code">color-mix(in oklch, ...)</code>
+                    </div>
+
+                    <div class="space-card">
+                        <div class="space-preview space-preview--hsl"></div>
+                        <h3 class="space-title">HSL</h3>
+                        <p class="space-description">
+                            Mezcla por matiz y saturación. Útil cuando quieres transiciones suaves 
+                            entre colores del mismo tono.
+                        </p>
+                        <code class="space-code">color-mix(in hsl, ...)</code>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Practical Examples Gallery -->
+            <section class="examples-gallery-section" aria-labelledby="examples-title">
+                <h2 id="examples-title" class="section-title">
+                    Galería de Ejemplos Prácticos
+                    <span class="section-subtitle">Click para cargar en el playground</span>
+                </h2>
+
+                <div class="examples-grid">
+                    <!-- Pastel Colors -->
+                    <article class="example-preset-card" data-example="pastel">
+                        <div class="preset-preview preset-preview--pastel">
+                            <div class="preset-swatch" style="background: #6B8CFF;"></div>
+                            <div class="preset-swatch" style="background: #A8B8FF;"></div>
+                            <div class="preset-swatch" style="background: #E0E6FF;"></div>
+                        </div>
+                        <h3 class="preset-title">Colores Pastel</h3>
+                        <p class="preset-description">
+                            Mezcla con blanco para tonos suaves y delicados
+                        </p>
+                        <code class="preset-code">color-mix(in srgb, blue 30%, white 70%)</code>
+                    </article>
+
+                    <!-- Deep Colors -->
+                    <article class="example-preset-card" data-example="deep">
+                        <div class="preset-preview preset-preview--deep">
+                            <div class="preset-swatch" style="background: #1A5490;"></div>
+                            <div class="preset-swatch" style="background: #0D3A5C;"></div>
+                            <div class="preset-swatch" style="background: #05202E;"></div>
+                        </div>
+                        <h3 class="preset-title">Colores Profundos</h3>
+                        <p class="preset-description">
+                            Mezcla con negro para tonos intensos y dramáticos
+                        </p>
+                        <code class="preset-code">color-mix(in srgb, blue 70%, black 30%)</code>
+                    </article>
+
+                    <!-- Glassmorphism -->
+                    <article class="example-preset-card" data-example="glass">
+                        <div class="preset-preview preset-preview--glass">
+                            <div class="preset-swatch" style="background: rgba(107, 140, 255, 0.7);"></div>
+                            <div class="preset-swatch" style="background: rgba(107, 140, 255, 0.4);"></div>
+                            <div class="preset-swatch" style="background: rgba(107, 140, 255, 0.1);"></div>
+                        </div>
+                        <h3 class="preset-title">Glassmorphism</h3>
+                        <p class="preset-description">
+                            Mezcla con transparent para efectos de vidrio
+                        </p>
+                        <code class="preset-code">color-mix(in srgb, blue 40%, transparent)</code>
+                    </article>
+
+                    <!-- Gradients -->
+                    <article class="example-preset-card" data-example="gradient">
+                        <div class="preset-preview preset-preview--gradient">
+                            <div class="preset-gradient"></div>
+                        </div>
+                        <h3 class="preset-title">Gradientes Suaves</h3>
+                        <p class="preset-description">
+                            Genera pasos intermedios para gradientes perfectos
+                        </p>
+                        <code class="preset-code">Multiple color-mix() steps</code>
+                    </article>
+
+                    <!-- Complementary -->
+                    <article class="example-preset-card" data-example="complementary">
+                        <div class="preset-preview preset-preview--complementary">
+                            <div class="preset-swatch" style="background: #6B8CFF;"></div>
+                            <div class="preset-swatch" style="background: #8C7FE6;"></div>
+                            <div class="preset-swatch" style="background: #FF8C6B;"></div>
+                        </div>
+                        <h3 class="preset-title">Complementarios</h3>
+                        <p class="preset-description">
+                            Mezcla colores opuestos para armonía visual
+                        </p>
+                        <code class="preset-code">color-mix(in oklch, blue 50%, orange 50%)</code>
+                    </article>
+
+                    <!-- Monochromatic -->
+                    <article class="example-preset-card" data-example="monochromatic">
+                        <div class="preset-preview preset-preview--mono">
+                            <div class="preset-swatch" style="background: #2448A6;"></div>
+                            <div class="preset-swatch" style="background: #4567B8;"></div>
+                            <div class="preset-swatch" style="background: #6B8CFF;"></div>
+                        </div>
+                        <h3 class="preset-title">Monocromático</h3>
+                        <p class="preset-description">
+                            Variaciones del mismo color para coherencia
+                        </p>
+                        <code class="preset-code">color-mix(in hsl, blue, white) at steps</code>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Comparison: With vs Without -->
+            <section class="comparison-section" aria-labelledby="comparison-title">
+                <h2 id="comparison-title" class="section-title">
+                    Con color-mix() vs Sin color-mix()
+                    <span class="section-subtitle">La diferencia es abismal</span>
+                </h2>
+
+                <div class="comparison-grid">
+                    <!-- Without color-mix -->
+                    <div class="comparison-column comparison-column--without">
+                        <div class="comparison-header">
+                            <span class="comparison-icon">❌</span>
+                            <h3>Método Tradicional</h3>
+                        </div>
+                        <div class="comparison-content">
+                            <h4>Necesitas:</h4>
+                            <ul class="comparison-list">
+                                <li>📦 Sass, Less o PostCSS</li>
+                                <li>🎨 15+ variables de color hardcoded</li>
+                                <li>⚙️ Build process configurado</li>
+                                <li>📝 Funciones personalizadas para mezclar</li>
+                                <li>🔄 Regenerar CSS en cada cambio</li>
+                                <li>📚 Documentar todas las variantes</li>
+                            </ul>
+                            
+                            <div class="comparison-code-block">
+                                <pre><code>// Sass
+$primary: #2448A6;
+$primary-light: lighten($primary, 20%);
+$primary-dark: darken($primary, 20%);
+$primary-hover: mix($primary, white, 80%);
+$primary-active: mix($primary, black, 90%);
+// ... 10+ más variables</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- With color-mix -->
+                    <div class="comparison-column comparison-column--with">
+                        <div class="comparison-header">
+                            <span class="comparison-icon">✅</span>
+                            <h3>Con color-mix()</h3>
+                        </div>
+                        <div class="comparison-content">
+                            <h4>Solo necesitas:</h4>
+                            <ul class="comparison-list">
+                                <li>🎨 2 colores base</li>
+                                <li>⚡ CSS nativo (sin build)</li>
+                                <li>🔄 Cambios en tiempo real</li>
+                                <li>✨ Código más limpio</li>
+                                <li>📦 Menos dependencies</li>
+                                <li>🚀 Performance mejorado</li>
+                            </ul>
+                            
+                            <div class="comparison-code-block">
+                                <pre><code>/* CSS Nativo */
+:root {
+  --primary: #2448A6;
+}
+
+.button {
+  background: var(--primary);
+}
+
+.button:hover {
+  background: color-mix(in srgb, var(--primary) 80%, white);
+}
+
+.button:active {
+  background: color-mix(in srgb, var(--primary) 90%, black);
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Examples -->
+            <section class="code-section" aria-labelledby="code-title">
+                <h2 id="code-title" class="section-title">
+                    Ejemplos de Código
+                    <span class="section-subtitle">Casos de uso reales con color-mix()</span>
+                </h2>
+
+                <div class="code-examples">
+                    <!-- Basic Usage -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">1. Uso Básico</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Mezclar dos colores al 50% */
+.element {
+  background: color-mix(in srgb, blue, yellow);
+}
+
+/* Control preciso del porcentaje */
+.element {
+  background: color-mix(in srgb, blue 70%, yellow 30%);
+}
+
+/* Usar variables CSS */
+.element {
+  background: color-mix(in srgb, var(--primary) 60%, var(--secondary) 40%);
+}</code></pre>
+                    </div>
+
+                    <!-- Hover States -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">2. Estados Hover Automáticos</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Aclarar en hover mezclando con blanco */
+.button {
+  background: var(--primary);
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background: color-mix(in srgb, var(--primary) 80%, white 20%);
+}
+
+.button:active {
+  background: color-mix(in srgb, var(--primary) 70%, black 30%);
+}
+
+.button:disabled {
+  background: color-mix(in srgb, var(--primary) 50%, gray 50%);
+}</code></pre>
+                    </div>
+
+                    <!-- Design System -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">3. Sistema de Diseño Completo</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>:root {
+  /* Colores base */
+  --brand-primary: #2448A6;
+  --brand-secondary: #F5B841;
+  
+  /* Variantes automáticas con color-mix */
+  --primary-50: color-mix(in srgb, var(--brand-primary) 10%, white 90%);
+  --primary-100: color-mix(in srgb, var(--brand-primary) 20%, white 80%);
+  --primary-200: color-mix(in srgb, var(--brand-primary) 40%, white 60%);
+  --primary-300: color-mix(in srgb, var(--brand-primary) 60%, white 40%);
+  --primary-400: color-mix(in srgb, var(--brand-primary) 80%, white 20%);
+  --primary-500: var(--brand-primary);
+  --primary-600: color-mix(in srgb, var(--brand-primary) 90%, black 10%);
+  --primary-700: color-mix(in srgb, var(--brand-primary) 75%, black 25%);
+  --primary-800: color-mix(in srgb, var(--brand-primary) 60%, black 40%);
+  --primary-900: color-mix(in srgb, var(--brand-primary) 40%, black 60%);
+}</code></pre>
+                    </div>
+
+                    <!-- Transparency -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">4. Transparencias Sin rgba()</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Backgrounds semitransparentes */
+.overlay {
+  background: color-mix(in srgb, var(--primary) 50%, transparent);
+}
+
+/* Gradientes de opacidad */
+.gradient {
+  background: linear-gradient(
+    to right,
+    color-mix(in srgb, blue 100%, transparent 0%),
+    color-mix(in srgb, blue 0%, transparent 100%)
+  );
+}
+
+/* Glassmorphism */
+.glass {
+  background: color-mix(in srgb, white 20%, transparent);
+  backdrop-filter: blur(10px);
+}</code></pre>
+                    </div>
+
+                    <!-- Dark Mode -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">5. Dark Mode Dinámico</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>:root {
+  --primary: #2448A6;
+  --background: white;
+  --text: black;
+}
+
+/* Dark mode usando color-mix */
+[data-theme="dark"] {
+  --background: color-mix(in srgb, var(--primary) 5%, black);
+  --text: color-mix(in srgb, white 90%, var(--primary) 10%);
+  
+  /* Ajustar primary para mejor contraste */
+  --primary: color-mix(in srgb, #2448A6 70%, white 30%);
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Use Cases -->
+            <section class="use-cases-section">
+                <h2 class="section-title">
+                    Casos de Uso de color-mix()
+                    <span class="section-subtitle">¿Cuándo usar esta función?</span>
+                </h2>
+
+                <div class="use-cases-grid">
+                    <div class="use-case-card">
+                        <div class="use-case-icon">🎨</div>
+                        <h3 class="use-case-title">Sistemas de Diseño</h3>
+                        <p class="use-case-description">
+                            Genera paletas completas desde 2 colores base. Escalas de grises, 
+                            variantes de intensidad, todo automático.
+                        </p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-icon">⚡</div>
+                        <h3 class="use-case-title">Estados Interactivos</h3>
+                        <p class="use-case-description">
+                            Hover, active, focus, disabled. Todos generados dinámicamente 
+                            sin necesidad de definir cada variante manualmente.
+                        </p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-icon">🌙</div>
+                        <h3 class="use-case-title">Dark Mode</h3>
+                        <p class="use-case-description">
+                            Ajusta colores automáticamente para dark mode. Mezcla con negro 
+                            o blanco según el tema activo.
+                        </p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-icon">✨</div>
+                        <h3 class="use-case-title">Glassmorphism</h3>
+                        <p class="use-case-description">
+                            Crea efectos de vidrio mezclando colores con transparent. 
+                            Sin necesidad de rgba() o hsla().
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Browser Support -->
+            <section class="support-section">
+                <h2 class="section-title">
+                    Soporte de Navegadores
+                    <span class="section-subtitle">color-mix() en producción</span>
+                </h2>
+
+                <div class="browser-support">
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🌐</div>
+                        <div class="browser-info">
+                            <strong>Chrome</strong>
+                            <span>111+ ✅ (Feb 2023)</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🦊</div>
+                        <div class="browser-info">
+                            <strong>Firefox</strong>
+                            <span>113+ ✅ (May 2023)</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🧭</div>
+                        <div class="browser-info">
+                            <strong>Safari</strong>
+                            <span>16.2+ ✅ (Dic 2022)</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🔷</div>
+                        <div class="browser-info">
+                            <strong>Edge</strong>
+                            <span>111+ ✅ (Feb 2023)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="support-note">
+                    <h3>Fallback para navegadores antiguos:</h3>
+                    <pre class="code-content"><code>/* Definir color estático primero (fallback) */
+.button {
+  background: #6B7FC9; /* Fallback */
+  background: color-mix(in srgb, var(--primary) 70%, var(--secondary) 30%);
+}
+
+/* O usar @supports */
+@supports (background: color-mix(in srgb, red, blue)) {
+  .button {
+    background: color-mix(in srgb, var(--primary) 70%, var(--secondary) 30%);
+  }
+}</code></pre>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <img 
+                            src="../assets/Logo_MRStudio.webp" 
+                            alt="Miguel Ramos Alarcon"
+                            width="40"
+                            height="40"
+                            loading="lazy"
+                        >
+                    </div>
+                    <div class="footer__info">
+                        <p class="footer__text">
+                            Desarrollado con CSS moderno por 
+                            <strong class="footer__author">Miguel Ramos Alarcon</strong>
+                        </p>
+                        <p class="footer__subtitle">Transformando ideas en experiencias digitales excepcionales</p>
+                    </div>
+                </div>
+                
+                <div class="footer__links">
+                    <a href="https://github.com/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="GitHub de Miguel Ramos Alarcon">
+                        GitHub
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="https://linkedin.com/in/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="LinkedIn de Miguel Ramos Alarcon">
+                        LinkedIn
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="../index.html" 
+                       class="footer__link"
+                       aria-label="Volver al índice principal">
+                        Más Demos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../scripts/theme-toggle.js"></script>
+    <script src="../scripts/color-mix.js"></script>
+</body>
+</html>

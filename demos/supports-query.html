@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Demo interactivo de @supports Query - CSS Moderno 2025 por Miguel Ramos Alarcon">
+    <meta name="author" content="Miguel Ramos Alarcon">
+    
+    <title>@supports Query - CSS Moderno 2025 | Miguel Ramos</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/supports-query.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232448A6' cx='50' cy='50' r='50'/><path fill='%23F5B841' d='M70 35L55 50L70 65M30 35L45 50L30 65'/></svg>">
+</head>
+<body>
+    <!-- Header -->
+    <header class="demo-header" role="banner">
+        <div class="container">
+            <nav class="demo-nav" role="navigation">
+                <a href="../index.html" class="back-link" aria-label="Volver al índice principal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Volver al Índice
+                </a>
+                
+                <!-- Branding -->
+                <div class="header-brand">
+                    <div class="brand-logo-small" aria-label="Logo Miguel Ramos">
+                        <img 
+                            src="../assets/Logo_MRStudio.webp" 
+                            alt="Miguel Ramos - Full Stack Developer"
+                            width="60"
+                            height="60"
+                            loading="lazy"
+                        >
+                    </div>
+                    <span class="brand-name">Miguel Ramos</span>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <button 
+                    class="theme-toggle" 
+                    type="button"
+                    aria-label="Cambiar tema entre claro y oscuro"
+                    aria-pressed="false"
+                    title="Cambiar tema"
+                >
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="demo-main" role="main">
+        <div class="container">
+            <!-- Hero Section -->
+            <section class="demo-hero">
+                <div class="demo-hero__badge">
+                    <span class="badge-text">CSS Moderno 2025</span>
+                    <span class="badge-tag">Inteligente</span>
+                </div>
+                
+                <h1 class="demo-hero__title">
+                    @supports Query
+                    <span class="title-highlight">Feature Detection Nativa</span>
+                </h1>
+                
+                <p class="demo-hero__description">
+                    @supports permite detectar si un navegador soporta una característica CSS antes de aplicar estilos. 
+                    Es progressive enhancement puro: ofreces la mejor experiencia posible según las capacidades del navegador, 
+                    con fallbacks elegantes para todos.
+                </p>
+                
+                <div class="demo-hero__features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🔍</div>
+                        <div class="feature-text">
+                            <strong>Feature Detection</strong>
+                            <span>Detecta capacidades CSS</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎯</div>
+                        <div class="feature-text">
+                            <strong>Progressive Enhancement</strong>
+                            <span>Mejor experiencia posible</span>
+                        </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🛡️</div>
+                        <div class="feature-text">
+                            <strong>Fallbacks Elegantes</strong>
+                            <span>Funciona en todos lados</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Browser Capabilities Detection -->
+            <section class="capabilities-section" aria-labelledby="capabilities-title">
+                <h2 id="capabilities-title" class="section-title">
+                    Capacidades de tu Navegador
+                    <span class="section-subtitle">Detectadas en tiempo real con @supports</span>
+                </h2>
+
+                <div class="capabilities-grid">
+                    <div class="capability-card" data-feature="grid">
+                        <div class="capability-icon">🔲</div>
+                        <h3 class="capability-title">CSS Grid</h3>
+                        <p class="capability-description">
+                            Sistema de layout bidimensional para crear interfaces complejas
+                        </p>
+                        <div class="capability-status" data-status="checking">
+                            <span class="status-badge">Verificando...</span>
+                        </div>
+                    </div>
+
+                    <div class="capability-card" data-feature="backdrop-filter">
+                        <div class="capability-icon">✨</div>
+                        <h3 class="capability-title">Backdrop Filter</h3>
+                        <p class="capability-description">
+                            Efectos de blur y filtros en elementos detrás (glassmorphism)
+                        </p>
+                        <div class="capability-status" data-status="checking">
+                            <span class="status-badge">Verificando...</span>
+                        </div>
+                    </div>
+
+                    <div class="capability-card" data-feature="color-mix">
+                        <div class="capability-icon">🎨</div>
+                        <h3 class="capability-title">color-mix()</h3>
+                        <p class="capability-description">
+                            Mezclar colores directamente en CSS sin preprocesadores
+                        </p>
+                        <div class="capability-status" data-status="checking">
+                            <span class="status-badge">Verificando...</span>
+                        </div>
+                    </div>
+
+                    <div class="capability-card" data-feature="container-queries">
+                        <div class="capability-icon">📦</div>
+                        <h3 class="capability-title">Container Queries</h3>
+                        <p class="capability-description">
+                            Responsive design basado en el contenedor padre
+                        </p>
+                        <div class="capability-status" data-status="checking">
+                            <span class="status-badge">Verificando...</span>
+                        </div>
+                    </div>
+
+                    <div class="capability-card" data-feature="has-selector">
+                        <div class="capability-icon">🎯</div>
+                        <h3 class="capability-title">Selector :has()</h3>
+                        <p class="capability-description">
+                            Seleccionar elementos padre basándose en sus hijos
+                        </p>
+                        <div class="capability-status" data-status="checking">
+                            <span class="status-badge">Verificando...</span>
+                        </div>
+                    </div>
+
+                    <div class="capability-card" data-feature="subgrid">
+                        <div class="capability-icon">⚡</div>
+                        <h3 class="capability-title">Subgrid</h3>
+                        <p class="capability-description">
+                            Grids anidados que heredan las columnas del padre
+                        </p>
+                        <div class="capability-status" data-status="checking">
+                            <span class="status-badge">Verificando...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Interactive Gallery Demo -->
+            <section class="interactive-section" aria-labelledby="demo-title">
+                <h2 id="demo-title" class="section-title">
+                    Galería Progresiva
+                    <span class="section-subtitle">El mismo HTML, diferente resultado según soporte</span>
+                </h2>
+
+                <div class="demo-instructions">
+                    <p class="instruction-text">
+                        <strong>Esta galería se adapta automáticamente:</strong> Si tu navegador soporta 
+                        características modernas (Grid, backdrop-filter, color-mix), verás el diseño avanzado. 
+                        Si no, verás un fallback elegante usando Flexbox y técnicas tradicionales.
+                    </p>
+                </div>
+
+                <!-- Progressive Gallery -->
+                <div class="progressive-gallery">
+                    <!-- Gallery Item 1 -->
+                    <article class="gallery-item" data-category="landscapes">
+                        <div class="gallery-image">
+                            <div class="image-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <span class="image-emoji">🏔️</span>
+                            </div>
+                            <div class="gallery-overlay">
+                                <button class="overlay-button" type="button" aria-label="Ver detalles">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-content">
+                            <h3 class="gallery-title">Montañas del Norte</h3>
+                            <p class="gallery-description">Paisaje montañoso con vistas espectaculares</p>
+                            <div class="gallery-meta">
+                                <span class="meta-tag">Paisaje</span>
+                                <span class="meta-date">2025</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Gallery Item 2 -->
+                    <article class="gallery-item" data-category="urban">
+                        <div class="gallery-image">
+                            <div class="image-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <span class="image-emoji">🌆</span>
+                            </div>
+                            <div class="gallery-overlay">
+                                <button class="overlay-button" type="button" aria-label="Ver detalles">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-content">
+                            <h3 class="gallery-title">Ciudad Nocturna</h3>
+                            <p class="gallery-description">Luces urbanas en la noche moderna</p>
+                            <div class="gallery-meta">
+                                <span class="meta-tag">Urbano</span>
+                                <span class="meta-date">2025</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Gallery Item 3 -->
+                    <article class="gallery-item" data-category="nature">
+                        <div class="gallery-image">
+                            <div class="image-placeholder" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <span class="image-emoji">🌊</span>
+                            </div>
+                            <div class="gallery-overlay">
+                                <button class="overlay-button" type="button" aria-label="Ver detalles">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-content">
+                            <h3 class="gallery-title">Costa del Pacífico</h3>
+                            <p class="gallery-description">Olas cristalinas y arena blanca</p>
+                            <div class="gallery-meta">
+                                <span class="meta-tag">Naturaleza</span>
+                                <span class="meta-date">2025</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Gallery Item 4 -->
+                    <article class="gallery-item" data-category="abstract">
+                        <div class="gallery-image">
+                            <div class="image-placeholder" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <span class="image-emoji">🎨</span>
+                            </div>
+                            <div class="gallery-overlay">
+                                <button class="overlay-button" type="button" aria-label="Ver detalles">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-content">
+                            <h3 class="gallery-title">Arte Digital</h3>
+                            <p class="gallery-description">Composición abstracta moderna</p>
+                            <div class="gallery-meta">
+                                <span class="meta-tag">Abstracto</span>
+                                <span class="meta-date">2025</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Gallery Item 5 -->
+                    <article class="gallery-item" data-category="landscapes">
+                        <div class="gallery-image">
+                            <div class="image-placeholder" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                                <span class="image-emoji">🌲</span>
+                            </div>
+                            <div class="gallery-overlay">
+                                <button class="overlay-button" type="button" aria-label="Ver detalles">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-content">
+                            <h3 class="gallery-title">Bosque Misterioso</h3>
+                            <p class="gallery-description">Naturaleza salvaje y enigmática</p>
+                            <div class="gallery-meta">
+                                <span class="meta-tag">Paisaje</span>
+                                <span class="meta-date">2025</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Gallery Item 6 -->
+                    <article class="gallery-item" data-category="urban">
+                        <div class="gallery-image">
+                            <div class="image-placeholder" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                <span class="image-emoji">🏙️</span>
+                            </div>
+                            <div class="gallery-overlay">
+                                <button class="overlay-button" type="button" aria-label="Ver detalles">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="gallery-content">
+                            <h3 class="gallery-title">Arquitectura Futura</h3>
+                            <p class="gallery-description">Rascacielos y diseño vanguardista</p>
+                            <div class="gallery-meta">
+                                <span class="meta-tag">Urbano</span>
+                                <span class="meta-date">2025</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Gallery Features Info -->
+                <div class="gallery-info">
+                    <h3 class="gallery-info__title">Características Adaptativas</h3>
+                    <div class="gallery-features">
+                        <div class="feature-badge" data-feature="grid">
+                            <span class="badge-icon">🔲</span>
+                            <div class="badge-content">
+                                <strong>CSS Grid</strong>
+                                <span>Layout masonry automático</span>
+                            </div>
+                        </div>
+                        <div class="feature-badge" data-feature="backdrop">
+                            <span class="badge-icon">✨</span>
+                            <div class="badge-content">
+                                <strong>Backdrop Filter</strong>
+                                <span>Overlay con efecto blur</span>
+                            </div>
+                        </div>
+                        <div class="feature-badge" data-feature="color-mix">
+                            <span class="badge-icon">🎨</span>
+                            <div class="badge-content">
+                                <strong>Color Mix</strong>
+                                <span>Colores dinámicos en hover</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Code Examples -->
+            <section class="code-section" aria-labelledby="code-title">
+                <h2 id="code-title" class="section-title">
+                    Ejemplos de @supports
+                    <span class="section-subtitle">Código real del demo</span>
+                </h2>
+
+                <div class="code-examples">
+                    <!-- Basic @supports -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">1. Detección Básica de Feature</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Fallback por defecto (flexbox) */
+.progressive-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Si el navegador SOPORTA Grid */
+@supports (display: grid) {
+  .progressive-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+}</code></pre>
+                    </div>
+
+                    <!-- Backdrop Filter -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">2. Glassmorphism con Fallback</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Overlay normal (fallback) */
+.gallery-overlay {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+/* Si SOPORTA backdrop-filter */
+@supports (backdrop-filter: blur(10px)) {
+  .gallery-overlay {
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px) saturate(180%);
+  }
+}</code></pre>
+                    </div>
+
+                    <!-- Color Mix -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">3. Colores Dinámicos</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Color estático (fallback) */
+.meta-tag {
+  background: #2448A6;
+}
+
+/* Si SOPORTA color-mix */
+@supports (background: color-mix(in srgb, red, blue)) {
+  .meta-tag:hover {
+    background: color-mix(in srgb, var(--primary-color) 70%, var(--secondary-color) 30%);
+  }
+}</code></pre>
+                    </div>
+
+                    <!-- Multiple Conditions -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">4. Múltiples Condiciones</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Si SOPORTA Grid Y Backdrop Filter */
+@supports (display: grid) and (backdrop-filter: blur(10px)) {
+  .progressive-gallery {
+    /* Layout moderno completo */
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  
+  .gallery-overlay {
+    backdrop-filter: blur(10px);
+  }
+}
+
+/* Si NO SOPORTA Grid */
+@supports not (display: grid) {
+  .progressive-gallery {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}</code></pre>
+                    </div>
+
+                    <!-- Selector Support -->
+                    <div class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">5. Detectar Selectores</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Si SOPORTA el selector :has() */
+@supports selector(:has(*)) {
+  .gallery-item:has(.gallery-overlay:hover) {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+  }
+}
+
+/* Si NO SOPORTA :has() */
+@supports not selector(:has(*)) {
+  .gallery-overlay:hover + .gallery-content {
+    /* Fallback sin :has() */
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Use Cases -->
+            <section class="use-cases-section">
+                <h2 class="section-title">
+                    ¿Cuándo Usar @supports?
+                    <span class="section-subtitle">Casos de uso prácticos</span>
+                </h2>
+
+                <div class="use-cases-grid">
+                    <div class="use-case-card">
+                        <div class="use-case-icon">🚀</div>
+                        <h3 class="use-case-title">Características Nuevas</h3>
+                        <p class="use-case-description">
+                            Usa lo último de CSS con confianza. Container Queries, :has(), color-mix() 
+                            con fallbacks automáticos.
+                        </p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-icon">🎨</div>
+                        <h3 class="use-case-title">Efectos Visuales</h3>
+                        <p class="use-case-description">
+                            Glassmorphism, filtros avanzados, blend modes. Si no se soporta, 
+                            alternativas elegantes.
+                        </p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-icon">📱</div>
+                        <h3 class="use-case-title">Layouts Modernos</h3>
+                        <p class="use-case-description">
+                            Grid avanzado, subgrid, aspect-ratio. Flexbox como fallback 
+                            para navegadores antiguos.
+                        </p>
+                    </div>
+
+                    <div class="use-case-card">
+                        <div class="use-case-icon">🛡️</div>
+                        <h3 class="use-case-title">Progressive Enhancement</h3>
+                        <p class="use-case-description">
+                            Todos obtienen una experiencia funcional. Los navegadores modernos 
+                            obtienen la mejor versión.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Browser Support -->
+            <section class="support-section">
+                <h2 class="section-title">
+                    Soporte de @supports
+                    <span class="section-subtitle">Ironía: muy bien soportado</span>
+                </h2>
+
+                <div class="browser-support">
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🌐</div>
+                        <div class="browser-info">
+                            <strong>Chrome</strong>
+                            <span>28+ ✅ (2013)</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🦊</div>
+                        <div class="browser-info">
+                            <strong>Firefox</strong>
+                            <span>22+ ✅ (2013)</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🧭</div>
+                        <div class="browser-info">
+                            <strong>Safari</strong>
+                            <span>9+ ✅ (2015)</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🔷</div>
+                        <div class="browser-info">
+                            <strong>Edge</strong>
+                            <span>12+ ✅ (2015)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="support-note">
+                    <p>
+                        <strong>📊 Soporte global:</strong> 97%+ de navegadores. Puedes usar @supports con confianza. 
+                        Para el 3% restante, simplemente no se aplicarán las reglas dentro del @supports.
+                    </p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <img 
+                        src="../assets/Logo_MRStudio.webp" 
+                        alt="Miguel Ramos Alarcon"
+                        width="40"
+                        height="40"
+                        loading="lazy"
+                        >
+                    </div>
+                    <div class="footer__info">
+                        <p class="footer__text">
+                            Desarrollado con CSS moderno por 
+                            <strong class="footer__author">Miguel Ramos Alarcon</strong>
+                        </p>
+                        <p class="footer__subtitle">Full Stack Developer & Creative Designer</p>
+                    </div>
+                </div>
+                
+                <div class="footer__links">
+                    <a href="https://github.com/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="GitHub de Miguel Ramos Alarcon">
+                        GitHub
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="https://linkedin.com/in/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="LinkedIn de Miguel Ramos Alarcon">
+                        LinkedIn
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="../index.html" 
+                       class="footer__link"
+                       aria-label="Volver al índice principal">
+                        Más Demos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../scripts/theme-toggle.js"></script>
+    <script src="../scripts/supports-query.js"></script>
+</body>
+</html>

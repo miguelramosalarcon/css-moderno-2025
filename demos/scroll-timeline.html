@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Básico -->
+    <title>Scroll Timeline - Animaciones sin JavaScript | Miguel Ramos</title>
+    <meta name="description" content="Demo interactivo de Scroll-Driven Animations con CSS puro. Aprende a crear animaciones controladas por scroll sin JavaScript usando animation-timeline y view()">
+    <meta name="author" content="Miguel Ramos Alarcon">
+    <meta name="keywords" content="scroll timeline, css animations, scroll-driven, animation-timeline, css sin javascript, web performance, view timeline">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Scroll Timeline - Animaciones CSS sin JavaScript">
+    <meta property="og:description" content="Animaciones fluidas controladas por scroll usando CSS nativo. Sin librerías, sin JavaScript, performance óptimo.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://miguelramos.dev/demos/scroll-timeline/">
+    <meta property="og:image" content="https://miguelramos.dev/demos/scroll-timeline/og-image.jpg">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://miguelramos.dev/demos/scroll-timeline/">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="scroll-timeline.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232448A6' cx='50' cy='50' r='50'/><path fill='%23F5B841' d='M50 20v60M20 50h60'/></svg>">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Scroll Timeline - Animaciones CSS sin JavaScript",
+      "author": {
+        "@type": "Person",
+        "name": "Miguel Ramos Alarcon",
+        "url": "https://miguelramos.dev"
+      },
+      "datePublished": "2025-01-01",
+      "dateModified": "2025-01-01",
+      "description": "Demo interactivo de Scroll-Driven Animations con CSS puro",
+      "keywords": "CSS, Scroll Timeline, Animation Timeline, Web Performance"
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="demo-header" role="banner">
+        <div class="container">
+            <nav class="demo-nav" role="navigation" aria-label="Navegación principal">
+                <a href="../index.html" class="back-link" aria-label="Volver al índice principal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Volver al Índice
+                </a>
+                
+                <!-- Branding -->
+                <div class="header-brand">
+                    <div class="brand-logo" aria-label="Logo Miguel Ramos">
+                        <img 
+                            src="../assets/Logo_MRStudio.webp" 
+                            alt="Miguel Ramos - Full Stack Developer"
+                            width="60"
+                            height="60"
+                            loading="eager"
+                        >
+                    </div>
+                    <span class="brand-name">Miguel Ramos</span>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <button 
+                    class="theme-toggle" 
+                    type="button"
+                    aria-label="Cambiar tema entre claro y oscuro"
+                    aria-pressed="false"
+                    title="Cambiar tema"
+                >
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Progress Bar (Sticky) -->
+    <div 
+        class="scroll-progress" 
+        role="progressbar" 
+        aria-label="Progreso de lectura de la página"
+        aria-valuenow="0" 
+        aria-valuemin="0" 
+        aria-valuemax="100"
+    >
+        <div class="scroll-progress-bar"></div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="demo-main" role="main">
+        <!-- Hero Section with Parallax -->
+        <section class="hero-parallax" aria-labelledby="hero-title">
+            <div class="hero-parallax-bg"></div>
+            <div class="container hero-content">
+                <div class="demo-hero">
+                    <div class="demo-hero__badge">
+                        <span class="badge-text">CSS Moderno 2025</span>
+                        <span class="badge-tag">Sin JavaScript</span>
+                    </div>
+                    
+                    <h1 id="hero-title" class="demo-hero__title">
+                        Scroll Timeline
+                        <span class="title-highlight">Animaciones Controladas por Scroll Sin JS</span>
+                    </h1>
+                    
+                    <p class="demo-hero__description">
+                        Scroll Timeline API permite crear animaciones fluidas basadas en el scroll del usuario, 
+                        eliminando completamente la necesidad de JavaScript o librerías externas. 
+                        Declara tus animaciones en CSS y déjalas sincronizar con el scroll automáticamente.
+                    </p>
+                    
+                    <div class="demo-hero__features">
+                        <div class="feature-item">
+                            <div class="feature-icon">🎬</div>
+                            <div class="feature-text">
+                                <strong>CSS Nativo</strong>
+                                <span>Sin librerías</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">⚡</div>
+                            <div class="feature-text">
+                                <strong>60 FPS</strong>
+                                <span>GPU acelerado</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">📊</div>
+                            <div class="feature-text">
+                                <strong>Core Vitals</strong>
+                                <span>Performance óptimo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Timeline Types Explanation -->
+            <section class="timeline-types-section" aria-labelledby="types-title">
+                <h2 id="types-title" class="section-title">
+                    Tipos de Timeline
+                    <span class="section-subtitle">Tres formas de controlar animaciones con scroll</span>
+                </h2>
+
+                <div class="timeline-types-grid">
+                    <!-- Scroll Timeline -->
+                    <article class="timeline-type-card">
+                        <div class="timeline-type-icon">📜</div>
+                        <h3 class="timeline-type-title">scroll()</h3>
+                        <p class="timeline-type-description">
+                            Vincula la animación al scroll de un contenedor específico. 
+                            Perfecto para progress bars y elementos que siguen el scroll completo de la página.
+                        </p>
+                        <code class="timeline-type-code">animation-timeline: scroll(root);</code>
+                    </article>
+
+                    <!-- View Timeline -->
+                    <article class="timeline-type-card">
+                        <div class="timeline-type-icon">👁️</div>
+                        <h3 class="timeline-type-title">view()</h3>
+                        <p class="timeline-type-description">
+                            Anima elementos cuando entran, están visibles o salen del viewport. 
+                            Ideal para reveal effects y parallax de elementos individuales.
+                        </p>
+                        <code class="timeline-type-code">animation-timeline: view();</code>
+                    </article>
+
+                    <!-- Animation Range -->
+                    <article class="timeline-type-card">
+                        <div class="timeline-type-icon">🎯</div>
+                        <h3 class="timeline-type-title">animation-range</h3>
+                        <p class="timeline-type-description">
+                            Define exactamente cuándo comienza y termina la animación. 
+                            Control preciso sobre entry, cover, contain y exit.
+                        </p>
+                        <code class="timeline-type-code">animation-range: entry 0% cover 40%;</code>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Section 1: Cards Reveal -->
+            <section class="cards-reveal-section" aria-labelledby="cards-title">
+                <h2 id="cards-title" class="section-title">
+                    Cards con View Timeline
+                    <span class="section-subtitle">Cada card se anima al entrar al viewport</span>
+                </h2>
+
+                <div class="cards-grid">
+                    <article class="reveal-card" aria-label="Ejemplo de fade in con slide">
+                        <div class="card-icon">✨</div>
+                        <h3 class="card-title">Fade In</h3>
+                        <p class="card-description">
+                            Aparece gradualmente con un movimiento suave desde abajo.
+                        </p>
+                        <code class="card-code">animation-timeline: view();</code>
+                    </article>
+
+                    <article class="reveal-card" aria-label="Ejemplo de scale">
+                        <div class="card-icon">🎯</div>
+                        <h3 class="card-title">Scale Up</h3>
+                        <p class="card-description">
+                            Crece desde el centro mientras aparece en pantalla.
+                        </p>
+                        <code class="card-code">transform: scale(0.8) → scale(1)</code>
+                    </article>
+
+                    <article class="reveal-card" aria-label="Ejemplo de rotate">
+                        <div class="card-icon">🔄</div>
+                        <h3 class="card-title">Rotate In</h3>
+                        <p class="card-description">
+                            Rota suavemente mientras se revela.
+                        </p>
+                        <code class="card-code">transform: rotateY(-15deg)</code>
+                    </article>
+
+                    <article class="reveal-card" aria-label="Ejemplo de blur">
+                        <div class="card-icon">🌫️</div>
+                        <h3 class="card-title">Blur Focus</h3>
+                        <p class="card-description">
+                            Enfoca desde un estado borroso.
+                        </p>
+                        <code class="card-code">filter: blur(10px) → blur(0)</code>
+                    </article>
+
+                    <article class="reveal-card" aria-label="Ejemplo de slide lateral">
+                        <div class="card-icon">➡️</div>
+                        <h3 class="card-title">Slide Left</h3>
+                        <p class="card-description">
+                            Entra deslizándose desde el lado derecho.
+                        </p>
+                        <code class="card-code">transform: translateX(100px)</code>
+                    </article>
+
+                    <article class="reveal-card" aria-label="Ejemplo de clip path">
+                        <div class="card-icon">✂️</div>
+                        <h3 class="card-title">Clip Reveal</h3>
+                        <p class="card-description">
+                            Se revela usando clip-path para un efecto dramático.
+                        </p>
+                        <code class="card-code">clip-path: inset(0 100% 0 0)</code>
+                    </article>
+                </div>
+
+                <div class="section-explanation">
+                    <h3>¿Cómo funciona?</h3>
+                    <p>
+                        Cada card usa <code>animation-timeline: view()</code> para vincular su animación 
+                        a su posición en el viewport. Cuando el elemento entra, la animación comienza; 
+                        cuando sale, puede revertirse o completarse.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 2: Color Morph -->
+            <section class="color-morph-section" aria-labelledby="color-title">
+                <div class="color-morph-content">
+                    <h2 id="color-title" class="section-title section-title--light">
+                        Color Morph Background
+                        <span class="section-subtitle">El fondo cambia mientras scrolleas esta sección</span>
+                    </h2>
+
+                    <div class="color-info-grid">
+                        <div class="color-info-item">
+                            <div class="color-swatch color-swatch--start"></div>
+                            <span class="color-label">Inicio: Azul Brand</span>
+                            <code class="color-value">#2448A6</code>
+                        </div>
+
+                        <div class="color-info-item">
+                            <div class="color-swatch color-swatch--middle"></div>
+                            <span class="color-label">Medio: Mezcla</span>
+                            <code class="color-value">color-mix()</code>
+                        </div>
+
+                        <div class="color-info-item">
+                            <div class="color-swatch color-swatch--end"></div>
+                            <span class="color-label">Final: Dorado</span>
+                            <code class="color-value">#F5B841</code>
+                        </div>
+                    </div>
+
+                    <p class="color-explanation">
+                        Esta sección usa <code>animation-timeline: view()</code> combinado con 
+                        <code>animation-range: entry 0% exit 100%</code> para crear una transición 
+                        suave de color mientras scrolleas. Sin JavaScript, solo CSS puro.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Section 3: Image Reveal -->
+            <section class="image-reveal-section" aria-labelledby="images-title">
+                <h2 id="images-title" class="section-title">
+                    Image Reveal con Clip-Path
+                    <span class="section-subtitle">Imágenes que se revelan progresivamente</span>
+                </h2>
+
+                <div class="image-reveal-grid">
+                    <figure class="reveal-image" aria-label="Imagen de ejemplo 1">
+                        <div class="image-wrapper">
+                            <div class="image-placeholder" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <span class="placeholder-text">Image 1</span>
+                            </div>
+                        </div>
+                        <figcaption>Reveal desde la izquierda</figcaption>
+                    </figure>
+
+                    <figure class="reveal-image" aria-label="Imagen de ejemplo 2">
+                        <div class="image-wrapper">
+                            <div class="image-placeholder" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <span class="placeholder-text">Image 2</span>
+                            </div>
+                        </div>
+                        <figcaption>Reveal desde abajo</figcaption>
+                    </figure>
+
+                    <figure class="reveal-image" aria-label="Imagen de ejemplo 3">
+                        <div class="image-wrapper">
+                            <div class="image-placeholder" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <span class="placeholder-text">Image 3</span>
+                            </div>
+                        </div>
+                        <figcaption>Reveal circular</figcaption>
+                    </figure>
+                </div>
+
+                <div class="section-explanation">
+                    <h3>Técnica de Clip-Path</h3>
+                    <p>
+                        Usando <code>clip-path</code> animado, las imágenes se revelan con diferentes efectos. 
+                        El uso de <code>clip-path</code> es GPU-acelerado y no causa layout shifts, 
+                        manteniendo un performance óptimo.
+                    </p>
+                    <pre class="code-snippet"><code>@keyframes reveal-left {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Section 4: Horizontal Scroll Gallery -->
+            <section class="horizontal-scroll-section" aria-labelledby="gallery-title">
+                <h2 id="gallery-title" class="section-title">
+                    Galería con Scroll Horizontal
+                    <span class="section-subtitle">Scrollea horizontalmente o usa las flechas</span>
+                </h2>
+
+                <div 
+                    class="horizontal-container"
+                    role="region"
+                    aria-label="Galería de elementos con scroll horizontal"
+                    tabindex="0"
+                >
+                    <div class="horizontal-content">
+                        <div class="gallery-item">
+                            <div class="item-number">01</div>
+                            <h3 class="item-title">Elemento Uno</h3>
+                            <p class="item-description">Primera card de la galería horizontal</p>
+                        </div>
+
+                        <div class="gallery-item">
+                            <div class="item-number">02</div>
+                            <h3 class="item-title">Elemento Dos</h3>
+                            <p class="item-description">Segunda card con scroll suave</p>
+                        </div>
+
+                        <div class="gallery-item">
+                            <div class="item-number">03</div>
+                            <h3 class="item-title">Elemento Tres</h3>
+                            <p class="item-description">Tercera card del carrusel</p>
+                        </div>
+
+                        <div class="gallery-item">
+                            <div class="item-number">04</div>
+                            <h3 class="item-title">Elemento Cuatro</h3>
+                            <p class="item-description">Cuarta card animada</p>
+                        </div>
+
+                        <div class="gallery-item">
+                            <div class="item-number">05</div>
+                            <h3 class="item-title">Elemento Cinco</h3>
+                            <p class="item-description">Quinta y última card</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-explanation">
+                    <h3>Scroll Horizontal Nativo</h3>
+                    <p>
+                        Esta galería usa <code>overflow-x: auto</code> con <code>scroll-snap-type</code> 
+                        para crear un carrusel nativo sin JavaScript. Las animaciones de entrada 
+                        están vinculadas con <code>view()</code> timeline.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Code Examples Section -->
+            <section class="code-examples-section" aria-labelledby="code-title">
+                <h2 id="code-title" class="section-title">
+                    Ejemplos de Código
+                    <span class="section-subtitle">Aprende la sintaxis de Scroll Timeline</span>
+                </h2>
+
+                <div class="code-examples-grid">
+                    <!-- Example 1: Basic Scroll Timeline -->
+                    <article class="code-example-card">
+                        <div class="code-example-header">
+                            <h3 class="code-example-title">1. Progress Bar Básico</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-example-content"><code>.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--primary);
+  transform-origin: left;
+  
+  /* Vincula al scroll del documento */
+  animation: grow-bar linear;
+  animation-timeline: scroll(root);
+}
+
+@keyframes grow-bar {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}</code></pre>
+                    </article>
+
+                    <!-- Example 2: View Timeline -->
+                    <article class="code-example-card">
+                        <div class="code-example-header">
+                            <h3 class="code-example-title">2. Fade In con View Timeline</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-example-content"><code>.card {
+  opacity: 0;
+  transform: translateY(50px);
+  
+  /* Se anima al entrar al viewport */
+  animation: fade-in linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}</code></pre>
+                    </article>
+
+                    <!-- Example 3: Animation Range -->
+                    <article class="code-example-card">
+                        <div class="code-example-header">
+                            <h3 class="code-example-title">3. Control con Animation Range</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-example-content"><code>.element {
+  animation: complex-animation linear;
+  animation-timeline: view();
+  
+  /* Controla cuándo comienza y termina */
+  animation-range: entry 0% exit 100%;
+  
+  /* Otras opciones:
+     - entry: cuando empieza a entrar
+     - cover: cuando está cubriendo el viewport
+     - contain: cuando está completamente visible
+     - exit: cuando empieza a salir
+  */
+}
+
+@keyframes complex-animation {
+  0% { transform: scale(0.8); opacity: 0; }
+  50% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}</code></pre>
+                    </article>
+
+                    <!-- Example 4: Horizontal Scroll -->
+                    <article class="code-example-card">
+                        <div class="code-example-header">
+                            <h3 class="code-example-title">4. Scroll Horizontal</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-example-content"><code>.horizontal-container {
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+}
+
+.gallery-item {
+  scroll-snap-align: center;
+  
+  /* Anima al entrar al viewport horizontal */
+  animation: slide-in linear;
+  animation-timeline: view(inline);
+  animation-range: entry 0% cover 30%;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}</code></pre>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Comparison: JS vs CSS -->
+            <section class="comparison-section" aria-labelledby="comparison-title">
+                <h2 id="comparison-title" class="section-title">
+                    Con JavaScript vs Con CSS
+                    <span class="section-subtitle">La diferencia es abismal</span>
+                </h2>
+
+                <div class="comparison-grid">
+                    <!-- With JavaScript -->
+                    <div class="comparison-column comparison-column--js">
+                        <div class="comparison-header">
+                            <span class="comparison-icon">❌</span>
+                            <h3>Método Tradicional (JavaScript)</h3>
+                        </div>
+                        <div class="comparison-content">
+                            <h4>Necesitas:</h4>
+                            <ul class="comparison-list">
+                                <li>📦 GSAP ScrollTrigger (50KB+)</li>
+                                <li>📝 Intersection Observer API</li>
+                                <li>🔧 Event listeners en scroll</li>
+                                <li>⚙️ Cálculos de posición en JS</li>
+                                <li>🐌 Performance degradado en scroll</li>
+                                <li>🔄 Throttle/debounce para optimizar</li>
+                                <li>📚 Dependencies en package.json</li>
+                            </ul>
+
+                            <div class="comparison-code-block">
+                                <pre><code>// JavaScript + GSAP ScrollTrigger
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+gsap.to(".element", {
+  opacity: 1,
+  y: 0,
+  scrollTrigger: {
+    trigger: ".element",
+    start: "top 80%",
+    end: "top 20%",
+    scrub: true,
+    markers: true
+  }
+});
+
+// ... más configuración
+// ... más código
+// ... más mantenimiento</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- With CSS -->
+                    <div class="comparison-column comparison-column--css">
+                        <div class="comparison-header">
+                            <span class="comparison-icon">✅</span>
+                            <h3>Con Scroll Timeline (CSS)</h3>
+                        </div>
+                        <div class="comparison-content">
+                            <h4>Solo necesitas:</h4>
+                            <ul class="comparison-list">
+                                <li>🎨 CSS puro nativo</li>
+                                <li>⚡ GPU acelerado (60 FPS)</li>
+                                <li>📦 0 bytes de JavaScript</li>
+                                <li>🚀 Performance óptimo</li>
+                                <li>✨ Declarativo y limpio</li>
+                                <li>🔄 Sin throttle/debounce</li>
+                                <li>📊 Core Web Vitals perfectos</li>
+                            </ul>
+
+                            <div class="comparison-code-block">
+                                <pre><code>/* CSS Puro */
+.element {
+  opacity: 0;
+  transform: translateY(50px);
+  
+  /* ¡Eso es todo! */
+  animation: fade-in linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sin librerías
+   Sin dependencies
+   Sin JavaScript
+   Performance perfecto */</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-metrics">
+                    <h3>Comparación de Métricas</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <div class="metric-label">Bundle Size</div>
+                            <div class="metric-values">
+                                <span class="metric-js">~50KB</span>
+                                <span class="metric-separator">vs</span>
+                                <span class="metric-css">0KB</span>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Performance</div>
+                            <div class="metric-values">
+                                <span class="metric-js">40-50 FPS</span>
+                                <span class="metric-separator">vs</span>
+                                <span class="metric-css">60 FPS</span>
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Complejidad</div>
+                            <div class="metric-values">
+                                <span class="metric-js">Alta</span>
+                                <span class="metric-separator">vs</span>
+                                <span class="metric-css">Baja</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Use Cases -->
+            <section class="use-cases-section" aria-labelledby="use-cases-title">
+                <h2 id="use-cases-title" class="section-title">
+                    Casos de Uso
+                    <span class="section-subtitle">¿Cuándo usar Scroll Timeline?</span>
+                </h2>
+
+                <div class="use-cases-grid">
+                    <article class="use-case-card">
+                        <div class="use-case-icon">🎨</div>
+                        <h3 class="use-case-title">Landing Pages</h3>
+                        <p class="use-case-description">
+                            Crea experiencias inmersivas con parallax, reveal effects y transiciones suaves 
+                            que captan la atención sin sacrificar performance.
+                        </p>
+                    </article>
+
+                    <article class="use-case-card">
+                        <div class="use-case-icon">📱</div>
+                        <h3 class="use-case-title">Portfolios</h3>
+                        <p class="use-case-description">
+                            Muestra tus proyectos con animaciones elegantes que se revelan al scrollear, 
+                            creando una narrativa visual profesional.
+                        </p>
+                    </article>
+
+                    <article class="use-case-card">
+                        <div class="use-case-icon">📖</div>
+                        <h3 class="use-case-title">Storytelling</h3>
+                        <p class="use-case-description">
+                            Narra historias con elementos que aparecen progresivamente, 
+                            guiando al usuario a través del contenido de forma natural.
+                        </p>
+                    </article>
+
+                    <article class="use-case-card">
+                        <div class="use-case-icon">🛍️</div>
+                        <h3 class="use-case-title">Product Showcases</h3>
+                        <p class="use-case-description">
+                            Presenta productos con efectos visuales impactantes que destacan 
+                            características clave mientras el usuario explora.
+                        </p>
+                    </article>
+
+                    <article class="use-case-card">
+                        <div class="use-case-icon">📊</div>
+                        <h3 class="use-case-title">Data Visualization</h3>
+                        <p class="use-case-description">
+                            Anima gráficos y datos que se revelan al entrar al viewport, 
+                            haciendo la información más digerible y atractiva.
+                        </p>
+                    </article>
+
+                    <article class="use-case-card">
+                        <div class="use-case-icon">📰</div>
+                        <h3 class="use-case-title">Editorial</h3>
+                        <p class="use-case-description">
+                            Mejora artículos largos con progress bars, imágenes que se revelan 
+                            y efectos que mantienen el engagement del lector.
+                        </p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Animation Range Reference -->
+            <section class="range-reference-section" aria-labelledby="range-title">
+                <h2 id="range-title" class="section-title">
+                    Referencia: Animation Range
+                    <span class="section-subtitle">Controla exactamente cuándo se ejecutan las animaciones</span>
+                </h2>
+
+                <div class="range-reference-content">
+                    <div class="range-diagram">
+                        <div class="diagram-viewport">
+                            <span class="diagram-label">Viewport</span>
+                        </div>
+                        <div class="diagram-phases">
+                            <div class="phase-item phase-entry">
+                                <span class="phase-label">entry</span>
+                                <span class="phase-desc">Empieza a entrar</span>
+                            </div>
+                            <div class="phase-item phase-cover">
+                                <span class="phase-label">cover</span>
+                                <span class="phase-desc">Cubriendo viewport</span>
+                            </div>
+                            <div class="phase-item phase-contain">
+                                <span class="phase-label">contain</span>
+                                <span class="phase-desc">Completamente visible</span>
+                            </div>
+                            <div class="phase-item phase-exit">
+                                <span class="phase-label">exit</span>
+                                <span class="phase-desc">Empieza a salir</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="range-examples">
+                        <h3>Ejemplos de Rangos</h3>
+                        
+                        <div class="range-example-item">
+                            <code class="range-code">animation-range: entry 0% cover 30%;</code>
+                            <p class="range-explanation">
+                                Comienza cuando el elemento empieza a entrar y termina cuando ha cubierto el 30% del viewport.
+                            </p>
+                        </div>
+
+                        <div class="range-example-item">
+                            <code class="range-code">animation-range: cover 0% exit 100%;</code>
+                            <p class="range-explanation">
+                                Comienza cuando empieza a cubrir y termina cuando ha salido completamente.
+                            </p>
+                        </div>
+
+                        <div class="range-example-item">
+                            <code class="range-code">animation-range: entry 0% exit 100%;</code>
+                            <p class="range-explanation">
+                                Se ejecuta durante todo el tiempo que el elemento está en el viewport.
+                            </p>
+                        </div>
+
+                        <div class="range-example-item">
+                            <code class="range-code">animation-range: contain 0% contain 100%;</code>
+                            <p class="range-explanation">
+                                Solo se anima cuando el elemento está completamente visible dentro del viewport.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Properties Reference -->
+            <section class="properties-section" aria-labelledby="properties-title">
+                <h2 id="properties-title" class="section-title">
+                    Propiedades CSS
+                    <span class="section-subtitle">Referencia completa de Scroll Timeline</span>
+                </h2>
+
+                <div class="properties-table">
+                    <div class="property-row">
+                        <div class="property-name">
+                            <code>animation-timeline</code>
+                        </div>
+                        <div class="property-description">
+                            Define qué timeline controla la animación. Puede ser <code>scroll()</code> o <code>view()</code>.
+                        </div>
+                        <div class="property-example">
+                            <code>animation-timeline: scroll(root);</code>
+                            <code>animation-timeline: view();</code>
+                        </div>
+                    </div>
+
+                    <div class="property-row">
+                        <div class="property-name">
+                            <code>animation-range</code>
+                        </div>
+                        <div class="property-description">
+                            Especifica cuándo comienza y termina la animación en relación al scroll.
+                        </div>
+                        <div class="property-example">
+                            <code>animation-range: entry 0% exit 100%;</code>
+                            <code>animation-range: cover 20% cover 80%;</code>
+                        </div>
+                    </div>
+
+                    <div class="property-row">
+                        <div class="property-name">
+                            <code>scroll()</code>
+                        </div>
+                        <div class="property-description">
+                            Función que crea un scroll timeline. Acepta eje (block, inline, x, y) y contenedor.
+                        </div>
+                        <div class="property-example">
+                            <code>scroll(root)</code>
+                            <code>scroll(nearest)</code>
+                            <code>scroll(y)</code>
+                        </div>
+                    </div>
+
+                    <div class="property-row">
+                        <div class="property-name">
+                            <code>view()</code>
+                        </div>
+                        <div class="property-description">
+                            Función que crea un view timeline. Acepta eje e inset para ajustar el área visible.
+                        </div>
+                        <div class="property-example">
+                            <code>view()</code>
+                            <code>view(block)</code>
+                            <code>view(inline 20px)</code>
+                        </div>
+                    </div>
+
+                    <div class="property-row">
+                        <div class="property-name">
+                            <code>timeline-scope</code>
+                        </div>
+                        <div class="property-description">
+                            Permite que descendientes accedan a un timeline nombrado definido en un ancestro.
+                        </div>
+                        <div class="property-example">
+                            <code>timeline-scope: --myTimeline;</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Browser Support -->
+            <section class="support-section" aria-labelledby="support-title">
+                <h2 id="support-title" class="section-title">
+                    Soporte de Navegadores
+                    <span class="section-subtitle">Scroll Timeline en producción</span>
+                </h2>
+
+                <div class="browser-support">
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🌐</div>
+                        <div class="browser-info">
+                            <strong>Chrome</strong>
+                            <span>115+ ✅ (Jul 2023)</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon">🔷</div>
+                        <div class="browser-info">
+                            <strong>Edge</strong>
+                            <span>115+ ✅ (Jul 2023)</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--partial">
+                        <div class="browser-icon">🦊</div>
+                        <div class="browser-info">
+                            <strong>Firefox</strong>
+                            <span>⚠️ En desarrollo</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--partial">
+                        <div class="browser-icon">🧭</div>
+                        <div class="browser-info">
+                            <strong>Safari</strong>
+                            <span>⚠️ En desarrollo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="support-note">
+                    <h3>Implementación Progresiva</h3>
+                    <p>
+                        Scroll Timeline es una mejora progresiva. Los navegadores que no lo soporten 
+                        simplemente mostrarán el contenido sin animaciones, manteniendo la funcionalidad completa.
+                    </p>
+                    <pre class="code-content"><code>/* Fallback para navegadores sin soporte */
+@supports not (animation-timeline: scroll()) {
+  .animated-element {
+    /* Versión estática o animación CSS tradicional */
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Feature detection con JavaScript (opcional) */
+if (CSS.supports('animation-timeline', 'scroll()')) {
+  // Navegador soporta Scroll Timeline
+  document.body.classList.add('supports-scroll-timeline');
+}</code></pre>
+                </div>
+
+                <div class="support-polyfill">
+                    <h3>Polyfill Disponible</h3>
+                    <p>
+                        Para navegadores sin soporte nativo, existe un polyfill oficial que puede agregar 
+                        la funcionalidad mediante JavaScript:
+                    </p>
+                    <pre class="code-content"><code>&lt;script src="https://flackr.github.io/scroll-timeline/dist/scroll-timeline.js"&gt;&lt;/script&gt;</code></pre>
+                    <p class="polyfill-note">
+                        <strong>Nota:</strong> El polyfill añade ~15KB pero permite usar la API en todos los navegadores. 
+                        Es una mejora progresiva opcional.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Performance Tips -->
+            <section class="tips-section" aria-labelledby="tips-title">
+                <h2 id="tips-title" class="section-title">
+                    Tips de Performance
+                    <span class="section-subtitle">Optimiza tus scroll animations</span>
+                </h2>
+
+                <div class="tips-grid">
+                    <article class="tip-card">
+                        <div class="tip-number">01</div>
+                        <h3 class="tip-title">Usa propiedades GPU-aceleradas</h3>
+                        <p class="tip-description">
+                            Limítate a <code>transform</code> y <code>opacity</code> para animaciones super fluidas. 
+                            Evita animar <code>width</code>, <code>height</code> o <code>top/left</code>.
+                        </p>
+                        <code class="tip-code">✅ transform, opacity, filter, clip-path</code>
+                        <code class="tip-code">❌ width, height, margin, padding</code>
+                    </article>
+
+                    <article class="tip-card">
+                        <div class="tip-number">02</div>
+                        <h3 class="tip-title">Usa will-change con cuidado</h3>
+                        <p class="tip-description">
+                            <code>will-change</code> prepara el navegador, pero úsalo solo cuando sea necesario 
+                            y remuévelo cuando termine la animación.
+                        </p>
+                        <code class="tip-code">will-change: transform, opacity;</code>
+                    </article>
+
+                    <article class="tip-card">
+                        <div class="tip-number">03</div>
+                        <h3 class="tip-title">Contain para aislar</h3>
+                        <p class="tip-description">
+                            <code>contain: layout paint</code> aísla el elemento y evita que las animaciones 
+                            afecten el resto del layout.
+                        </p>
+                        <code class="tip-code">contain: layout paint;</code>
+                    </article>
+
+                    <article class="tip-card">
+                        <div class="tip-number">04</div>
+                        <h3 class="tip-title">content-visibility para lazy render</h3>
+                        <p class="tip-description">
+                            Usa <code>content-visibility: auto</code> para que el navegador solo renderice 
+                            elementos cercanos al viewport.
+                        </p>
+                        <code class="tip-code">content-visibility: auto;</code>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Resources -->
+            <section class="resources-section" aria-labelledby="resources-title">
+                <h2 id="resources-title" class="section-title">
+                    Recursos Adicionales
+                    <span class="section-subtitle">Aprende más sobre Scroll Timeline</span>
+                </h2>
+
+                <div class="resources-grid">
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation-timeline" 
+                       class="resource-card" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Documentación de MDN sobre animation-timeline">
+                        <div class="resource-icon">📚</div>
+                        <h3 class="resource-title">MDN Web Docs</h3>
+                        <p class="resource-description">Documentación oficial completa</p>
+                    </a>
+
+                    <a href="https://scroll-driven-animations.style/" 
+                       class="resource-card" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Herramienta de scroll-driven animations">
+                        <div class="resource-icon">🛠️</div>
+                        <h3 class="resource-title">Scroll Driven Animations</h3>
+                        <p class="resource-description">Herramienta y ejemplos interactivos</p>
+                    </a>
+
+                    <a href="https://developer.chrome.com/articles/scroll-driven-animations/" 
+                       class="resource-card" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Artículo de Chrome Developers">
+                        <div class="resource-icon">🎓</div>
+                        <h3 class="resource-title">Chrome for Developers</h3>
+                        <p class="resource-description">Guía completa de Google</p>
+                    </a>
+
+                    <a href="https://github.com/flackr/scroll-timeline" 
+                       class="resource-card" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="Polyfill en GitHub">
+                        <div class="resource-icon">💾</div>
+                        <h3 class="resource-title">Polyfill GitHub</h3>
+                        <p class="resource-description">Implementación para todos los navegadores</p>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <img 
+                            src="../assets/Logo_MRStudio.webp" 
+                            alt="Miguel Ramos Alarcon"
+                            width="40"
+                            height="40"
+                            loading="lazy"
+                        >
+                    </div>
+                    <div class="footer__info">
+                        <p class="footer__text">
+                            Desarrollado con CSS moderno por 
+                            <strong class="footer__author">Miguel Ramos Alarcon</strong>
+                        </p>
+                        <p class="footer__subtitle">Transformando ideas en experiencias digitales excepcionales</p>
+                    </div>
+                </div>
+                
+                <div class="footer__links">
+                    <a href="https://github.com/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="GitHub de Miguel Ramos Alarcon">
+                        GitHub
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="https://linkedin.com/in/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="LinkedIn de Miguel Ramos Alarcon">
+                        LinkedIn
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="../index.html" 
+                       class="footer__link"
+                       aria-label="Volver al índice principal">
+                        Más Demos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../scripts/theme-toggle.js"></script>
+</body>
+</html>

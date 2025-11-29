@@ -1,0 +1,2132 @@
+/* ==========================================================================
+   SCROLL TIMELINE CSS - Demo específico
+   PARTE 1: Base y Layout Principal
+   
+   NOTA: Este archivo asume que main.css ya está cargado con:
+   - Variables CSS (colores, spacing, tipografía)
+   - Reset y estilos base
+   - Container y utilidades
+   - Theme toggle JS ya está en theme-toggle.js
+   ========================================================================== */
+
+/* ==========================================================================
+   DEMO HEADER Y NAVEGACIÓN
+   ========================================================================== */
+
+.demo-header {
+  background: var(--background);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  backdrop-filter: blur(10px);
+  padding: var(--spacing-lg) 0;
+}
+
+.demo-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.back-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all var(--transition-fast);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: 1px solid transparent;
+}
+
+.back-link:hover {
+  color: var(--primary-color);
+  background: color-mix(in srgb, var(--primary-color) 8%, transparent);
+  border-color: var(--primary-color);
+  transform: translateX(-2px);
+}
+
+.back-link svg {
+  transition: transform var(--transition-fast);
+}
+
+.back-link:hover svg {
+  transform: translateX(-2px);
+}
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.brand-logo {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-logo img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px color-mix(in srgb, var(--primary-color) 20%, transparent));
+  transition: transform var(--transition-normal);
+}
+
+.brand-logo:hover img {
+  transform: scale(1.05);
+}
+
+.brand-name {
+  font-weight: 600;
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+}
+
+/* ==========================================================================
+   THEME TOGGLE (Estilos visuales - la lógica está en theme-toggle.js)
+   ========================================================================== */
+
+.theme-toggle {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--surface);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.theme-toggle:hover {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px color-mix(in srgb, var(--primary-color) 30%, transparent);
+}
+
+.theme-toggle:hover .theme-toggle__icon {
+  color: var(--brand-white);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle__icon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  color: var(--text-primary);
+  transition: all var(--transition-normal);
+  transform-origin: center;
+}
+
+:root[data-theme="light"] .theme-toggle__icon--sun,
+:root:not([data-theme]) .theme-toggle__icon--sun {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+:root[data-theme="light"] .theme-toggle__icon--moon,
+:root:not([data-theme]) .theme-toggle__icon--moon {
+  opacity: 0;
+  transform: rotate(180deg) scale(0.5);
+}
+
+:root[data-theme="dark"] .theme-toggle__icon--sun {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0.5);
+}
+
+:root[data-theme="dark"] .theme-toggle__icon--moon {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* ==========================================================================
+   SCROLL PROGRESS BAR (STICKY) - CON SCROLL TIMELINE
+   ========================================================================== */
+
+.scroll-progress {
+  position: fixed;
+  top: 85px; /* Debajo del header */
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--border-color);
+  z-index: calc(var(--z-sticky) - 1);
+  pointer-events: none;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  transform-origin: left;
+  
+  /* 🎬 SCROLL TIMELINE ANIMATION */
+  animation: progress-grow linear;
+  animation-timeline: scroll(root);
+  
+  box-shadow: 0 0 20px color-mix(in srgb, var(--primary-color) 50%, transparent);
+}
+
+@keyframes progress-grow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.scroll-progress-bar::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: -2px;
+  width: 8px;
+  height: 8px;
+  background: var(--secondary-color);
+  border-radius: 50%;
+  box-shadow: 0 0 10px var(--secondary-color);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.7;
+  }
+}
+
+/* ==========================================================================
+   SECTION TITLES
+   ========================================================================== */
+
+.section-title {
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2xl);
+  text-align: center;
+  position: relative;
+  padding-bottom: var(--spacing-md);
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 2px;
+}
+
+.section-subtitle {
+  display: block;
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-sm);
+}
+
+.section-title--light {
+  color: var(--brand-white);
+}
+
+.section-title--light .section-subtitle {
+  color: color-mix(in srgb, var(--brand-white) 80%, transparent);
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border-color);
+  padding: var(--spacing-2xl) 0;
+  margin-top: var(--spacing-3xl);
+}
+
+.footer__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-xl);
+}
+
+.footer__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.footer__logo {
+  flex-shrink: 0;
+}
+
+.footer__logo img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px color-mix(in srgb, var(--primary-color) 15%, transparent));
+}
+
+.footer__info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.footer__text {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.footer__author {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.footer__subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.footer__links {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.footer__link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.footer__link:hover {
+  color: var(--primary-color);
+}
+
+.footer__separator {
+  color: var(--text-muted);
+}
+
+/* ==========================================================================
+   FIN DE PARTE 1
+   ========================================================================== */
+
+   /* ==========================================================================
+   SCROLL TIMELINE CSS - PARTE 2
+   HERO SECTION CON PARALLAX + VISUAL INTERACTIVO CSS PURO
+   ========================================================================== */
+
+/* ==========================================================================
+   HERO PARALLAX CONTAINER
+   ========================================================================== */
+
+.hero-parallax {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--background);
+}
+
+/* ==========================================================================
+   PARALLAX BACKGROUND
+   ========================================================================== */
+
+.hero-parallax-bg {
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--primary-color) 10%, var(--background)) 0%,
+    var(--background) 50%,
+    color-mix(in srgb, var(--secondary-color) 8%, var(--background)) 100%
+  );
+  z-index: 0;
+  
+  /* 🎬 PARALLAX CON SCROLL TIMELINE */
+  animation: parallax-bg linear;
+  animation-timeline: view();
+  animation-range: entry 0% exit 100%;
+  
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+@keyframes parallax-bg {
+  from {
+    transform: translateY(-10%) scale(1.1);
+  }
+  to {
+    transform: translateY(10%) scale(1.1);
+  }
+}
+
+/* Gradiente overlay */
+.hero-parallax-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, 
+      color-mix(in srgb, var(--primary-color) 15%, transparent) 0%, 
+      transparent 50%
+    ),
+    radial-gradient(circle at 80% 20%, 
+      color-mix(in srgb, var(--secondary-color) 15%, transparent) 0%, 
+      transparent 50%
+    );
+  animation: gradient-shift 8s ease-in-out infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* ==========================================================================
+   VISUAL INTERACTIVO CSS PURO - SCROLL TIMELINE DEMO
+   ========================================================================== */
+
+.hero-visual {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 300px;
+  height: 400px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Container del "viewport" visual */
+.visual-viewport {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 3px solid color-mix(in srgb, var(--primary-color) 30%, transparent);
+  border-radius: var(--border-radius-large);
+  background: color-mix(in srgb, var(--surface) 50%, transparent);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  box-shadow: 
+    0 20px 60px color-mix(in srgb, var(--primary-color) 20%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, white 10%, transparent);
+}
+
+/* Label del viewport */
+.visual-viewport::before {
+  content: 'Viewport';
+  position: absolute;
+  top: var(--spacing-sm);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  z-index: 10;
+}
+
+/* Track del scroll */
+.visual-track {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: color-mix(in srgb, var(--primary-color) 20%, transparent);
+  transform: translateX(-50%);
+}
+
+/* Elementos que se animan dentro del "viewport" */
+.visual-element {
+  position: absolute;
+  left: 50%;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+  color: var(--brand-white);
+  box-shadow: var(--shadow-lg);
+  transform: translateX(-50%);
+}
+
+/* Elemento 1 - Fade In */
+.visual-element:nth-child(2) {
+  top: 60px;
+  background: linear-gradient(135deg, var(--primary-color), color-mix(in srgb, var(--primary-color) 80%, var(--secondary-color)));
+  
+  /* 🎬 ANIMACIÓN AUTOMÁTICA AL CARGAR */
+  animation: visual-fade-in 2s ease-out 0.5s forwards;
+  opacity: 0;
+  transform: translateX(-50%) translateY(20px);
+}
+
+@keyframes visual-fade-in {
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Elemento 2 - Scale */
+.visual-element:nth-child(3) {
+  top: 160px;
+  background: linear-gradient(135deg, var(--secondary-color), color-mix(in srgb, var(--secondary-color) 80%, var(--primary-color)));
+  
+  animation: visual-scale 2s ease-out 1s forwards;
+  opacity: 0;
+  transform: translateX(-50%) scale(0.5);
+}
+
+@keyframes visual-scale {
+  to {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+/* Elemento 3 - Rotate */
+.visual-element:nth-child(4) {
+  top: 260px;
+  background: linear-gradient(135deg, var(--info), color-mix(in srgb, var(--info) 80%, var(--primary-color)));
+  
+  animation: visual-rotate 2s ease-out 1.5s forwards;
+  opacity: 0;
+  transform: translateX(-50%) rotateY(-90deg);
+}
+
+@keyframes visual-rotate {
+  to {
+    opacity: 1;
+    transform: translateX(-50%) rotateY(0deg);
+  }
+}
+
+/* Indicador de scroll en el visual */
+.visual-scroll-indicator {
+  position: absolute;
+  bottom: var(--spacing-md);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-5px); }
+}
+
+.visual-scroll-indicator::after {
+  content: '';
+  width: 2px;
+  height: 20px;
+  background: linear-gradient(to bottom, var(--primary-color), transparent);
+}
+
+/* Labels de los elementos */
+.visual-element::before {
+  content: attr(data-label);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Progress indicator en el track */
+.visual-progress {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  background: var(--secondary-color);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 20px var(--secondary-color);
+  
+  /* Se mueve automáticamente */
+  animation: visual-progress-move 3s ease-in-out infinite;
+}
+
+@keyframes visual-progress-move {
+  0%, 100% { 
+    top: 40px; 
+  }
+  50% { 
+    top: calc(100% - 60px); 
+  }
+}
+
+/* ==========================================================================
+   HERO CONTENT
+   ========================================================================== */
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: var(--spacing-3xl) 0;
+  max-width: 50%; /* Dejar espacio para el visual */
+}
+
+.hero-content .demo-hero {
+  animation: hero-fade-in linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes hero-fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   DEMO HERO ELEMENTS
+   ========================================================================== */
+
+.demo-hero {
+  text-align: left; /* Cambio a left por el visual a la derecha */
+  position: relative;
+  z-index: 2;
+}
+
+.demo-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+  animation: badge-slide linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 20%;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+@keyframes badge-slide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.badge-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.badge-tag {
+  background: var(--secondary-color);
+  color: var(--text-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, white 30%, transparent),
+    transparent
+  );
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  50%, 100% { left: 100%; }
+}
+
+.demo-hero__title {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.1;
+  animation: title-reveal linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 25%;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+@keyframes title-reveal {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.title-highlight {
+  display: block;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  margin-top: var(--spacing-sm);
+  animation: gradient-flow 3s ease-in-out infinite;
+}
+
+@keyframes gradient-flow {
+  0%, 100% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+}
+
+.demo-hero__description {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 600px;
+  margin-bottom: var(--spacing-2xl);
+  animation: description-fade linear;
+  animation-timeline: view();
+  animation-range: entry 5% cover 30%;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes description-fade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.demo-hero__features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: var(--spacing-md);
+  max-width: 600px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--primary-color) 5%, transparent),
+    color-mix(in srgb, var(--secondary-color) 5%, transparent)
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.feature-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--primary-color) 20%, transparent);
+  border-color: var(--primary-color);
+}
+
+.feature-item:hover::before {
+  opacity: 1;
+}
+
+.feature-item:hover .feature-icon {
+  transform: scale(1.2) rotate(5deg);
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  transition: transform var(--transition-normal);
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  text-align: left;
+}
+
+.feature-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+.feature-text span {
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+}
+
+/* Stagger en features */
+.demo-hero__features .feature-item:nth-child(1) {
+  animation: feature-reveal linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.demo-hero__features .feature-item:nth-child(2) {
+  animation: feature-reveal linear;
+  animation-timeline: view();
+  animation-range: entry 5% cover 35%;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.demo-hero__features .feature-item:nth-child(3) {
+  animation: feature-reveal linear;
+  animation-timeline: view();
+  animation-range: entry 10% cover 40%;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes feature-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE HERO
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .hero-visual {
+    right: 5%;
+    width: 250px;
+    height: 350px;
+  }
+  
+  .hero-content {
+    max-width: 55%;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-parallax {
+    min-height: auto;
+    padding: var(--spacing-3xl) 0;
+  }
+  
+  .hero-visual {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin: 0 auto var(--spacing-2xl);
+    width: 200px;
+    height: 280px;
+  }
+  
+  .hero-content {
+    max-width: 100%;
+  }
+  
+  .demo-hero {
+    text-align: center;
+  }
+  
+  .demo-hero__title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .demo-hero__features {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+  
+  .demo-hero__description {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-visual {
+    width: 180px;
+    height: 240px;
+  }
+  
+  .visual-element {
+    width: 60px;
+    height: 60px;
+    font-size: var(--font-size-base);
+  }
+  
+  .demo-hero__title {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY - REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-parallax-bg,
+  .hero-content .demo-hero,
+  .demo-hero__badge,
+  .demo-hero__title,
+  .demo-hero__description,
+  .demo-hero__features .feature-item,
+  .visual-element,
+  .visual-progress {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  
+  .visual-scroll-indicator {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   FIN DE PARTE 2
+   ========================================================================== */
+
+/* ==========================================================================
+   HERO FEATURES CON STAGGER EFFECT
+   ========================================================================== */
+
+/* Cada feature aparece con delay escalonado */
+.demo-hero__features .feature-item:nth-child(1) {
+  animation: feature-reveal linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.demo-hero__features .feature-item:nth-child(2) {
+  animation: feature-reveal linear;
+  animation-timeline: view();
+  animation-range: entry 5% cover 35%;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.demo-hero__features .feature-item:nth-child(3) {
+  animation: feature-reveal linear;
+  animation-timeline: view();
+  animation-range: entry 10% cover 40%;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+@keyframes feature-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effect mejorado para features */
+.feature-item {
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--primary-color) 5%, transparent),
+    color-mix(in srgb, var(--secondary-color) 5%, transparent)
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.feature-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px color-mix(in srgb, var(--primary-color) 20%, transparent);
+  border-color: var(--primary-color);
+}
+
+.feature-item:hover::before {
+  opacity: 1;
+}
+
+.feature-item:hover .feature-icon {
+  transform: scale(1.2) rotate(5deg);
+  transition: transform var(--transition-normal);
+}
+
+/* ==========================================================================
+   BADGE ANIMATIONS
+   ========================================================================== */
+
+.demo-hero__badge {
+  /* 🎬 SLIDE FROM TOP */
+  animation: badge-slide linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 20%;
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+@keyframes badge-slide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Badge tag con efecto shine */
+.badge-tag {
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, white 30%, transparent),
+    transparent
+  );
+  animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+  0% {
+    left: -100%;
+  }
+  50%, 100% {
+    left: 100%;
+  }
+}
+
+/* ==========================================================================
+   TITLE ANIMATIONS
+   ========================================================================== */
+
+.demo-hero__title {
+  /* 🎬 SCALE + FADE */
+  animation: title-reveal linear;
+  animation-timeline: view();
+  animation-range: entry 0% cover 25%;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+@keyframes title-reveal {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Gradient text animation */
+.title-highlight {
+  background-size: 200% auto;
+  animation: gradient-flow 3s ease-in-out infinite;
+}
+
+@keyframes gradient-flow {
+  0%, 100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+/* ==========================================================================
+   DESCRIPTION ANIMATION
+   ========================================================================== */
+
+.demo-hero__description {
+  /* 🎬 FADE IN DELAYED */
+  animation: description-fade linear;
+  animation-timeline: view();
+  animation-range: entry 5% cover 30%;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes description-fade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   SCROLL INDICATOR (opcional - aparece al inicio)
+   ========================================================================== */
+
+.scroll-indicator {
+  position: absolute;
+  bottom: var(--spacing-2xl);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--text-muted);
+  font-size: var(--font-size-sm);
+  z-index: 3;
+  
+  /* Desaparece al scrollear */
+  animation: scroll-indicator-fade linear;
+  animation-timeline: scroll(root);
+  opacity: 1;
+}
+
+@keyframes scroll-indicator-fade {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}
+
+.scroll-indicator::after {
+  content: '';
+  width: 2px;
+  height: 30px;
+  background: linear-gradient(
+    to bottom,
+    var(--primary-color),
+    transparent
+  );
+  animation: scroll-line 2s ease-in-out infinite;
+}
+
+@keyframes scroll-line {
+  0%, 100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(0.5);
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   RESPONSIVE HERO PARALLAX
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .hero-parallax {
+    min-height: 80vh;
+  }
+  
+  .hero-parallax-bg {
+    inset: -10%; /* Menos movimiento en móvil */
+  }
+  
+  .demo-hero__title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .demo-hero__features {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Simplificar animaciones en móvil */
+  .hero-parallax-bg::after {
+    animation-duration: 30s;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-parallax {
+    min-height: 70vh;
+  }
+  
+  .demo-hero__title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .demo-hero__description {
+    font-size: var(--font-size-base);
+  }
+}
+
+/* ==========================================================================
+   PERFORMANCE OPTIMIZATIONS ESPECÍFICAS DEL HERO
+   ========================================================================== */
+
+/* Will-change solo en elementos animados */
+.hero-parallax-bg {
+  will-change: transform;
+}
+
+/* Remover will-change después de la animación (con JS o dejar que el navegador decida) */
+.hero-content.animated-in .demo-hero {
+  will-change: auto;
+}
+
+/* Contain para aislar el hero */
+.hero-parallax {
+  contain: layout paint;
+}
+
+/* ==========================================================================
+   ACCESSIBILITY - REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-parallax-bg {
+    animation: none;
+    transform: none;
+  }
+  
+  .hero-parallax-bg::before,
+  .hero-parallax-bg::after {
+    animation: none;
+  }
+  
+  .scroll-indicator::after {
+    animation: none;
+  }
+  
+  .title-highlight {
+    animation: none;
+  }
+  
+  .badge-tag::before {
+    animation: none;
+  }
+  
+  /* Mostrar contenido inmediatamente */
+  .hero-content .demo-hero,
+  .demo-hero__badge,
+  .demo-hero__title,
+  .demo-hero__description,
+  .demo-hero__features .feature-item {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   DARK MODE ADJUSTMENTS
+   ========================================================================== */
+
+:root[data-theme="dark"] .hero-parallax-bg {
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--primary-color) 8%, var(--background)) 0%,
+    var(--background) 50%,
+    color-mix(in srgb, var(--secondary-color) 6%, var(--background)) 100%
+  );
+}
+
+:root[data-theme="dark"] .hero-parallax-bg::before {
+  background: 
+    radial-gradient(circle at 20% 80%, 
+      color-mix(in srgb, var(--primary-color) 20%, transparent) 0%, 
+      transparent 50%
+    ),
+    radial-gradient(circle at 80% 20%, 
+      color-mix(in srgb, var(--secondary-color) 20%, transparent) 0%, 
+      transparent 50%
+    );
+}
+
+/* ==========================================================================
+   FIN DE PARTE 2
+   ========================================================================== */
+
+   /* ==========================================================================
+   SCROLL TIMELINE CSS - PARTE 3
+   TIMELINE TYPES + SECCIONES BASE
+   ========================================================================== */
+
+/* ==========================================================================
+   DEMO MAIN
+   ========================================================================== */
+
+.demo-main {
+  padding-top: var(--spacing-2xl);
+}
+
+/* Espaciado entre secciones */
+section {
+  margin-bottom: var(--spacing-3xl);
+}
+
+/* ==========================================================================
+   TIMELINE TYPES SECTION
+   ========================================================================== */
+
+.timeline-types-section {
+  padding: var(--spacing-3xl) 0;
+}
+
+.timeline-types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-2xl);
+}
+
+/* ==========================================================================
+   TIMELINE TYPE CARDS
+   ========================================================================== */
+
+.timeline-type-card {
+  background: var(--surface);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-large);
+  padding: var(--spacing-2xl);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  
+  /* 🎬 ANIMACIÓN AL ENTRAR AL VIEWPORT */
+  animation: card-fade-in linear forwards; /* ← forwards mantiene el estado final */
+  animation-timeline: view();
+  animation-range: entry 0% cover 30%;
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+@keyframes card-fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.timeline-type-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-normal);
+}
+
+.timeline-type-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--primary-color);
+}
+
+.timeline-type-card:hover::before {
+  transform: scaleX(1);
+}
+
+/* Stagger effect para cada card */
+.timeline-type-card:nth-child(1) {
+  animation-range: entry 0% cover 30%;
+}
+
+.timeline-type-card:nth-child(2) {
+  animation-range: entry 5% cover 35%;
+}
+
+.timeline-type-card:nth-child(3) {
+  animation-range: entry 10% cover 40%;
+}
+
+/* ==========================================================================
+   TIMELINE TYPE CARD ELEMENTS
+   ========================================================================== */
+
+.timeline-type-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-lg);
+  display: inline-block;
+  transition: transform var(--transition-normal);
+}
+
+.timeline-type-card:hover .timeline-type-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.timeline-type-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+}
+
+.timeline-type-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+}
+
+.timeline-type-code {
+  display: block;
+  background: var(--background);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+  font-size: var(--font-size-xs);
+  color: var(--primary-color);
+  border: 1px solid var(--border-color);
+  overflow-x: auto;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   SECTION EXPLANATION (componente reutilizable)
+   ========================================================================== */
+
+.section-explanation {
+  margin-top: var(--spacing-2xl);
+  padding: var(--spacing-xl);
+  background: color-mix(in srgb, var(--primary-color) 5%, var(--surface));
+  border-left: 4px solid var(--primary-color);
+  border-radius: var(--border-radius);
+}
+
+.section-explanation h3 {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+}
+
+.section-explanation p {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-md);
+}
+
+.section-explanation code {
+  background: var(--background);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: calc(var(--border-radius) / 2);
+  font-size: var(--font-size-xs);
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+.section-explanation:last-child p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   CODE SNIPPET (reutilizable para pre > code)
+   ========================================================================== */
+
+.code-snippet {
+  background: var(--background);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  overflow-x: auto;
+  margin-top: var(--spacing-md);
+}
+
+.code-snippet code {
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  color: var(--text-primary);
+  background: none;
+  padding: 0;
+}
+
+/* ==========================================================================
+   DEMO HERO ELEMENTS (para hero section)
+   ========================================================================== */
+
+.demo-hero {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.demo-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.badge-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.badge-tag {
+  background: var(--secondary-color);
+  color: var(--text-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.demo-hero__title {
+  font-size: var(--font-size-3xl);
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  line-height: 1.1;
+}
+
+.title-highlight {
+  display: block;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+  margin-top: var(--spacing-sm);
+}
+
+.demo-hero__description {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 800px;
+  margin: 0 auto var(--spacing-2xl);
+}
+
+.demo-hero__features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  text-align: left;
+}
+
+.feature-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+}
+
+.feature-text span {
+  color: var(--text-muted);
+  font-size: var(--font-size-xs);
+}
+
+/* ==========================================================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================================================== */
+
+/* Contain para aislar layouts */
+.timeline-type-card {
+  contain: layout paint;
+}
+
+/* Will-change solo en elementos animados */
+.timeline-type-card {
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   RESPONSIVE - TIMELINE TYPES
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  .timeline-types-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .timeline-type-card {
+    padding: var(--spacing-xl);
+  }
+  
+  .timeline-type-icon {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-type-card {
+    padding: var(--spacing-lg);
+  }
+  
+  .timeline-type-icon {
+    font-size: 2rem;
+  }
+  
+  .timeline-type-title {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY - REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-type-card {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+  
+  .timeline-type-card:hover {
+    transform: none;
+  }
+  
+  .timeline-type-icon {
+    transition: none;
+  }
+}
+
+/* ==========================================================================
+   DARK MODE ADJUSTMENTS
+   ========================================================================== */
+
+:root[data-theme="dark"] .timeline-type-card {
+  background: color-mix(in srgb, var(--surface) 80%, transparent);
+  border-color: color-mix(in srgb, var(--border-color) 50%, transparent);
+}
+
+:root[data-theme="dark"] .timeline-type-card:hover {
+  border-color: var(--primary-color);
+  background: var(--surface);
+}
+
+:root[data-theme="dark"] .section-explanation {
+  background: color-mix(in srgb, var(--primary-color) 8%, var(--surface));
+}
+
+/* ==========================================================================
+   FIN DE PARTE 3
+   ========================================================================== */
+
+   /* ==========================================================================
+   SCROLL TIMELINE CSS - PARTE 4
+   CARDS REVEAL SECTION - 6 DIFERENTES ANIMACIONES
+   ========================================================================== */
+
+/* ==========================================================================
+   CARDS REVEAL SECTION
+   ========================================================================== */
+
+.cards-reveal-section {
+  padding: var(--spacing-3xl) 0;
+  background: linear-gradient(180deg, 
+    var(--background) 0%, 
+    color-mix(in srgb, var(--primary-color) 2%, var(--background)) 100%
+  );
+}
+
+/* ==========================================================================
+   CARDS GRID
+   ========================================================================== */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--spacing-xl);
+  margin-top: var(--spacing-2xl);
+}
+
+/* ==========================================================================
+   REVEAL CARD BASE
+   ========================================================================== */
+
+.reveal-card {
+  background: var(--surface);
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-large);
+  padding: var(--spacing-2xl);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  min-height: 280px;
+  
+  /* Performance */
+  contain: layout paint;
+  will-change: transform, opacity;
+}
+
+.reveal-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, 
+    color-mix(in srgb, var(--primary-color) 5%, transparent),
+    color-mix(in srgb, var(--secondary-color) 5%, transparent)
+  );
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  pointer-events: none;
+}
+
+.reveal-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 
+    0 20px 40px color-mix(in srgb, var(--primary-color) 15%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primary-color) 20%, transparent);
+}
+
+.reveal-card:hover::before {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   CARD ELEMENTS
+   ========================================================================== */
+
+.card-icon {
+  font-size: 3rem;
+  transition: transform var(--transition-normal);
+}
+
+.reveal-card:hover .card-icon {
+  transform: scale(1.15) rotate(5deg);
+}
+
+.card-title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.card-description {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+  margin: 0;
+}
+
+.card-code {
+  display: block;
+  background: var(--background);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius);
+  font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', monospace;
+  font-size: var(--font-size-xs);
+  color: var(--primary-color);
+  border: 1px solid var(--border-color);
+  overflow-x: auto;
+  white-space: nowrap;
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   CARD 1: FADE IN
+   ========================================================================== */
+
+.reveal-card:nth-child(1) {
+  /* 🎬 FADE IN CON VIEW TIMELINE */
+  animation: reveal-fade-in linear forwards;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+@keyframes reveal-fade-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   CARD 2: SCALE UP
+   ========================================================================== */
+
+.reveal-card:nth-child(2) {
+  /* 🎬 SCALE FROM CENTER */
+  animation: reveal-scale linear forwards;
+  animation-timeline: view();
+  animation-range: entry 5% cover 45%;
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+@keyframes reveal-scale {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ==========================================================================
+   CARD 3: ROTATE IN
+   ========================================================================== */
+
+.reveal-card:nth-child(3) {
+  /* 🎬 ROTATE Y AXIS */
+  animation: reveal-rotate linear forwards;
+  animation-timeline: view();
+  animation-range: entry 10% cover 50%;
+  opacity: 0;
+  transform: perspective(1000px) rotateY(-15deg);
+  transform-style: preserve-3d;
+}
+
+@keyframes reveal-rotate {
+  to {
+    opacity: 1;
+    transform: perspective(1000px) rotateY(0deg);
+  }
+}
+
+/* ==========================================================================
+   CARD 4: BLUR FOCUS
+   ========================================================================== */
+
+.reveal-card:nth-child(4) {
+  /* 🎬 BLUR TO FOCUS */
+  animation: reveal-blur linear forwards;
+  animation-timeline: view();
+  animation-range: entry 0% cover 40%;
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(30px);
+}
+
+@keyframes reveal-blur {
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
+   CARD 5: SLIDE LEFT
+   ========================================================================== */
+
+.reveal-card:nth-child(5) {
+  /* 🎬 SLIDE FROM RIGHT */
+  animation: reveal-slide-left linear forwards;
+  animation-timeline: view();
+  animation-range: entry 5% cover 45%;
+  opacity: 0;
+  transform: translateX(100px);
+}
+
+@keyframes reveal-slide-left {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==========================================================================
+   CARD 6: CLIP REVEAL
+   ========================================================================== */
+
+.reveal-card:nth-child(6) {
+  /* 🎬 CLIP PATH REVEAL */
+  animation: reveal-clip linear forwards;
+  animation-timeline: view();
+  animation-range: entry 10% cover 50%;
+  clip-path: inset(0 100% 0 0);
+}
+
+@keyframes reveal-clip {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+/* Efecto adicional para el icono de la card 6 */
+.reveal-card:nth-child(6) .card-icon {
+  animation: icon-fade-in linear forwards;
+  animation-timeline: view();
+  animation-range: entry 15% cover 55%;
+  opacity: 0;
+}
+
+@keyframes icon-fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   ALTERNATIVE: Si quieres que todas usen el mismo timing
+   Descomenta esto y comenta los rangos individuales arriba
+   ========================================================================== */
+
+/*
+.reveal-card {
+  animation-range: entry 0% cover 40%;
+}
+
+.reveal-card:nth-child(odd) {
+  animation-range: entry 0% cover 35%;
+}
+
+.reveal-card:nth-child(even) {
+  animation-range: entry 5% cover 40%;
+}
+*/
+
+/* ==========================================================================
+   HOVER EFFECTS MEJORADOS
+   ========================================================================== */
+
+.reveal-card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+/* Mantener transformaciones específicas en hover */
+.reveal-card:nth-child(1):hover {
+  transform: translateY(-8px);
+}
+
+.reveal-card:nth-child(2):hover {
+  transform: scale(1.05);
+}
+
+.reveal-card:nth-child(3):hover {
+  transform: perspective(1000px) rotateY(2deg) scale(1.02);
+}
+
+.reveal-card:nth-child(4):hover {
+  transform: translateY(-8px);
+}
+
+.reveal-card:nth-child(5):hover {
+  transform: translateX(-4px);
+}
+
+.reveal-card:nth-child(6):hover {
+  transform: translateY(-8px);
+}
+
+/* ==========================================================================
+   RESPONSIVE - CARDS GRID
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 768px) {
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .reveal-card {
+    min-height: 240px;
+    padding: var(--spacing-xl);
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+  }
+  
+  /* Simplificar animaciones en móvil */
+  .reveal-card:nth-child(n) {
+    animation-range: entry 0% cover 30%;
+  }
+}
+
+@media (max-width: 480px) {
+  .reveal-card {
+    min-height: auto;
+    padding: var(--spacing-lg);
+  }
+  
+  .card-icon {
+    font-size: 2rem;
+  }
+  
+  .card-title {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY - REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-card {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+  
+  .reveal-card:hover {
+    transform: none !important;
+  }
+  
+  .reveal-card:nth-child(6) .card-icon {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   DARK MODE ADJUSTMENTS
+   ========================================================================== */
+
+:root[data-theme="dark"] .cards-reveal-section {
+  background: linear-gradient(180deg, 
+    var(--background) 0%, 
+    color-mix(in srgb, var(--primary-color) 3%, var(--background)) 100%
+  );
+}
+
+:root[data-theme="dark"] .reveal-card {
+  background: color-mix(in srgb, var(--surface) 90%, transparent);
+  border-color: color-mix(in srgb, var(--border-color) 50%, transparent);
+}
+
+:root[data-theme="dark"] .reveal-card:hover {
+  background: var(--surface);
+  border-color: var(--primary-color);
+  box-shadow: 
+    0 20px 40px color-mix(in srgb, var(--primary-color) 25%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primary-color) 30%, transparent);
+}
+
+/* ==========================================================================
+   PERFORMANCE HINTS
+   ========================================================================== */
+
+/* GPU acceleration para todas las cards */
+.reveal-card {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Contain para aislar repaints */
+.reveal-card {
+  contain: layout paint style;
+}
+
+/* ==========================================================================
+   FIN DE PARTE 4
+   ========================================================================== */
+
+   

@@ -22,7 +22,7 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="scroll-timeline.css">
+    <link rel="stylesheet" href="../styles/scroll-timeline.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232448A6' cx='50' cy='50' r='50'/><path fill='%23F5B841' d='M50 20v60M20 50h60'/></svg>">
@@ -106,52 +106,68 @@
     <!-- Main Content -->
     <main class="demo-main" role="main">
         <!-- Hero Section with Parallax -->
-        <section class="hero-parallax" aria-labelledby="hero-title">
-            <div class="hero-parallax-bg"></div>
-            <div class="container hero-content">
-                <div class="demo-hero">
-                    <div class="demo-hero__badge">
-                        <span class="badge-text">CSS Moderno 2025</span>
-                        <span class="badge-tag">Sin JavaScript</span>
+        <!-- Hero Section with Parallax -->
+    <section class="hero-parallax" aria-labelledby="hero-title">
+        <div class="hero-parallax-bg"></div>
+    
+        <!-- Visual Interactivo CSS Puro -->
+        <div class="hero-visual">
+            <div class="visual-viewport">
+                <div class="visual-track"></div>
+                <div class="visual-progress"></div>
+                <div class="visual-element" data-label="Fade">1</div>
+                <div class="visual-element" data-label="Scale">2</div>
+                <div class="visual-element" data-label="Rotate">3</div>
+                <div class="visual-scroll-indicator">
+                    <span>Scroll</span>
+                </div>
+            </div>
+        </div>
+    
+        <div class="container hero-content">
+            <div class="demo-hero">
+                <div class="demo-hero__badge">
+                    <span class="badge-text">CSS Moderno 2025</span>
+                    <span class="badge-tag">Sin JavaScript</span>
+                </div>
+    
+                <h1 id="hero-title" class="demo-hero__title">
+                    Scroll Timeline
+                    <span class="title-highlight">Animaciones Controladas por Scroll Sin JS</span>
+                </h1>
+    
+                <p class="demo-hero__description">
+                    Scroll Timeline API permite crear animaciones fluidas basadas en el scroll del usuario,
+                    eliminando completamente la necesidad de JavaScript o librerías externas.
+                    Declara tus animaciones en CSS y déjalas sincronizar con el scroll automáticamente.
+                </p>
+    
+                <div class="demo-hero__features">
+                    <div class="feature-item">
+                        <div class="feature-icon">🎬</div>
+                        <div class="feature-text">
+                            <strong>CSS Nativo</strong>
+                            <span>Sin librerías</span>
+                        </div>
                     </div>
-                    
-                    <h1 id="hero-title" class="demo-hero__title">
-                        Scroll Timeline
-                        <span class="title-highlight">Animaciones Controladas por Scroll Sin JS</span>
-                    </h1>
-                    
-                    <p class="demo-hero__description">
-                        Scroll Timeline API permite crear animaciones fluidas basadas en el scroll del usuario, 
-                        eliminando completamente la necesidad de JavaScript o librerías externas. 
-                        Declara tus animaciones en CSS y déjalas sincronizar con el scroll automáticamente.
-                    </p>
-                    
-                    <div class="demo-hero__features">
-                        <div class="feature-item">
-                            <div class="feature-icon">🎬</div>
-                            <div class="feature-text">
-                                <strong>CSS Nativo</strong>
-                                <span>Sin librerías</span>
-                            </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <div class="feature-text">
+                            <strong>60 FPS</strong>
+                            <span>GPU acelerado</span>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">⚡</div>
-                            <div class="feature-text">
-                                <strong>60 FPS</strong>
-                                <span>GPU acelerado</span>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <div class="feature-icon">📊</div>
-                            <div class="feature-text">
-                                <strong>Core Vitals</strong>
-                                <span>Performance óptimo</span>
-                            </div>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <div class="feature-text">
+                            <strong>Core Vitals</strong>
+                            <span>Performance óptimo</span>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
         <div class="container">
             <!-- Timeline Types Explanation -->

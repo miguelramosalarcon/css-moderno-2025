@@ -10,7 +10,7 @@
 [![License](https://img.shields.io/badge/License-MIT-F5B841?style=for-the-badge)](LICENSE)
 
 <p align="center">
-  <img src="assets/preview.jpeg" alt="CSS Moderno 2025 Preview" width="800">
+  <img src="assets/preview.jpg" alt="CSS Moderno 2025 Preview" width="800">
 </p>
 
 **Explora el futuro del CSS a través de demos interactivos, código comentado y ejemplos prácticos.**

@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Básico -->
+    <title>Backdrop Filter - Efectos Glassmorphism CSS | Miguel Ramos</title>
+    <meta name="description" content="Demo interactivo de backdrop-filter CSS. Aprende a crear efectos glassmorphism, blur y filtros visuales modernos para interfaces elegantes.">
+    <meta name="author" content="Miguel Ramos Alarcon">
+    <meta name="keywords" content="backdrop-filter, glassmorphism, CSS blur, frosted glass, CSS filters, UI design, web design moderno">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Backdrop Filter - Efectos Glassmorphism CSS">
+    <meta property="og:description" content="Crea interfaces modernas con efectos de cristal usando backdrop-filter. Sin librerías, CSS puro.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://miguelramos.dev/demos/backdrop-filter/">
+    <meta property="og:image" content="https://miguelramos.dev/demos/backdrop-filter/og-image.jpg">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://miguelramos.dev/demos/backdrop-filter/">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/backdrop-filter.css">
+    <link rel="stylesheet" href="../styles/back-to-top.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232448A6' cx='50' cy='50' r='50'/><path fill='%23F5B841' d='M30 30h40v40H30z' opacity='0.6'/></svg>">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": "Backdrop Filter - Efectos Glassmorphism con CSS",
+      "author": {
+        "@type": "Person",
+        "name": "Miguel Ramos Alarcon",
+        "url": "https://miguelramos.dev"
+      },
+      "datePublished": "2025-11-28",
+      "dateModified": "2025-11-28",
+      "description": "Demo interactivo de backdrop-filter para crear efectos glassmorphism modernos",
+      "keywords": "CSS, Backdrop Filter, Glassmorphism, UI Design, Web Performance"
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="demo-header" role="banner">
+        <div class="container">
+            <nav class="demo-nav" role="navigation" aria-label="Navegación principal">
+                <a href="../index.html" class="back-link" aria-label="Volver al índice principal">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    </svg>
+                    Volver al Índice
+                </a>
+                
+                <!-- Branding -->
+                <div class="header-brand">
+                    <div class="brand-logo" aria-label="Logo Miguel Ramos">
+                        <img 
+                            src="../assets/Logo_MRStudio.webp" 
+                            alt="Miguel Ramos - Full Stack Developer"
+                            width="60"
+                            height="60"
+                            loading="eager"
+                        >
+                    </div>
+                    <span class="brand-name">Miguel Ramos</span>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <button 
+                    class="theme-toggle" 
+                    type="button"
+                    aria-label="Cambiar tema entre claro y oscuro"
+                    aria-pressed="false"
+                    title="Cambiar tema"
+                >
+                    <svg class="theme-toggle__icon theme-toggle__icon--sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="theme-toggle__icon theme-toggle__icon--moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                        <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="demo-main" role="main">
+        <!-- Hero Section con Glassmorphism -->
+        <section class="hero-glass" aria-labelledby="hero-title">
+            <div class="hero-glass__background" aria-hidden="true">
+                <div class="hero-glass__orb hero-glass__orb--1"></div>
+                <div class="hero-glass__orb hero-glass__orb--2"></div>
+                <div class="hero-glass__orb hero-glass__orb--3"></div>
+            </div>
+            
+            <div class="container">
+                <div class="hero-glass__content">
+                    <div class="demo-hero__badge">
+                        <span class="badge-text">CSS Moderno 2025</span>
+                        <span class="badge-tag">Elegante</span>
+                    </div>
+                    
+                    <h1 id="hero-title" class="demo-hero__title">
+                        backdrop-filter
+                        <span class="title-highlight">Interfaces de Cristal con CSS Puro</span>
+                    </h1>
+                    
+                    <p class="demo-hero__description">
+                        Crea efectos de vidrio esmerilado, blur de fondo y filtros visuales 
+                        que transforman interfaces ordinarias en experiencias elegantes y modernas.
+                        Todo con CSS nativo, sin JavaScript.
+                    </p>
+                    
+                    <div class="demo-hero__features">
+                        <div class="feature-item">
+                            <div class="feature-icon" aria-hidden="true">🪟</div>
+                            <div class="feature-text">
+                                <strong>Glassmorphism</strong>
+                                <span>Efecto cristal</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" aria-hidden="true">🎨</div>
+                            <div class="feature-text">
+                                <strong>8 Filtros</strong>
+                                <span>Combinables</span>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon" aria-hidden="true">⚡</div>
+                            <div class="feature-text">
+                                <strong>GPU Acelerado</strong>
+                                <span>Performance</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- Playground Interactivo -->
+            <section class="playground-section" aria-labelledby="playground-title">
+                <h2 id="playground-title" class="section-title">
+                    Playground Interactivo
+                    <span class="section-subtitle">Experimenta con los filtros en tiempo real</span>
+                </h2>
+
+                <div class="playground-container">
+                    <!-- Panel de Controles -->
+                    <div class="playground-controls">
+                        <h3 class="controls-title">Filtros</h3>
+                        
+                        <!-- Blur -->
+                        <div class="control-group">
+                            <label for="blurRange" class="control-label">
+                                <span class="label-text">blur()</span>
+                                <span class="label-value" id="blurValue">10px</span>
+                            </label>
+                            <input 
+                                type="range" 
+                                id="blurRange" 
+                                min="0" 
+                                max="30" 
+                                value="10"
+                                class="filter-slider"
+                                aria-describedby="blurDesc"
+                            >
+                            <p id="blurDesc" class="control-description">
+                                Desenfoque gaussiano del fondo
+                            </p>
+                        </div>
+
+                        <!-- Brightness -->
+                        <div class="control-group">
+                            <label for="brightnessRange" class="control-label">
+                                <span class="label-text">brightness()</span>
+                                <span class="label-value" id="brightnessValue">100%</span>
+                            </label>
+                            <input 
+                                type="range" 
+                                id="brightnessRange" 
+                                min="0" 
+                                max="200" 
+                                value="100"
+                                class="filter-slider"
+                                aria-describedby="brightnessDesc"
+                            >
+                            <p id="brightnessDesc" class="control-description">
+                                Luminosidad del fondo filtrado
+                            </p>
+                        </div>
+
+                        <!-- Saturate -->
+                        <div class="control-group">
+                            <label for="saturateRange" class="control-label">
+                                <span class="label-text">saturate()</span>
+                                <span class="label-value" id="saturateValue">100%</span>
+                            </label>
+                            <input 
+                                type="range" 
+                                id="saturateRange" 
+                                min="0" 
+                                max="200" 
+                                value="100"
+                                class="filter-slider"
+                                aria-describedby="saturateDesc"
+                            >
+                            <p id="saturateDesc" class="control-description">
+                                Intensidad de colores
+                            </p>
+                        </div>
+
+                        <!-- Contrast -->
+                        <div class="control-group">
+                            <label for="contrastRange" class="control-label">
+                                <span class="label-text">contrast()</span>
+                                <span class="label-value" id="contrastValue">100%</span>
+                            </label>
+                            <input 
+                                type="range" 
+                                id="contrastRange" 
+                                min="0" 
+                                max="200" 
+                                value="100"
+                                class="filter-slider"
+                                aria-describedby="contrastDesc"
+                            >
+                            <p id="contrastDesc" class="control-description">
+                                Diferencia entre claros y oscuros
+                            </p>
+                        </div>
+
+                        <!-- Opacity del fondo -->
+                        <div class="control-group">
+                            <label for="opacityRange" class="control-label">
+                                <span class="label-text">Opacidad fondo</span>
+                                <span class="label-value" id="opacityValue">20%</span>
+                            </label>
+                            <input 
+                                type="range" 
+                                id="opacityRange" 
+                                min="0" 
+                                max="100" 
+                                value="20"
+                                class="filter-slider"
+                                aria-describedby="opacityDesc"
+                            >
+                            <p id="opacityDesc" class="control-description">
+                                Transparencia de la capa de color
+                            </p>
+                        </div>
+
+                        <!-- Código generado -->
+                        <div class="control-group">
+                            <label class="control-label">
+                                <span class="label-text">Código CSS</span>
+                                <button 
+                                    type="button" 
+                                    class="copy-btn" 
+                                    id="copyCodeBtn"
+                                    aria-label="Copiar código CSS"
+                                    title="Copiar código"
+                                >
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+                                    </svg>
+                                </button>
+                            </label>
+                            <pre class="generated-code" id="generatedCode"><code>backdrop-filter: blur(10px);
+background: rgba(255,255,255,0.2);</code></pre>
+                        </div>
+
+                        <!-- Presets -->
+                        <div class="control-group">
+                            <span class="control-label">
+                                <span class="label-text">Presets rápidos</span>
+                            </span>
+                            <div class="preset-buttons">
+                                <button type="button" class="preset-btn" data-preset="glass" aria-label="Aplicar preset Glassmorphism">
+                                    🪟 Glass
+                                </button>
+                                <button type="button" class="preset-btn" data-preset="frost" aria-label="Aplicar preset Frosted">
+                                    ❄️ Frost
+                                </button>
+                                <button type="button" class="preset-btn" data-preset="dark" aria-label="Aplicar preset Dark">
+                                    🌑 Dark
+                                </button>
+                                <button type="button" class="preset-btn" data-preset="vibrant" aria-label="Aplicar preset Vibrant">
+                                    🌈 Vibrant
+                                </button>
+                                <button type="button" class="preset-btn" data-preset="subtle" aria-label="Aplicar preset Subtle">
+                                    💨 Subtle
+                                </button>
+                                <button type="button" class="preset-btn" data-preset="reset" aria-label="Resetear valores">
+                                    🔄 Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vista Previa -->
+                    <div class="playground-preview">
+                        <h3 class="preview-title">Vista Previa</h3>
+                        
+                        <div class="preview-area">
+                            <!-- Fondo con gradiente -->
+                            <div class="preview-background" aria-hidden="true">
+                                <div class="preview-orb preview-orb--1"></div>
+                                <div class="preview-orb preview-orb--2"></div>
+                                <div class="preview-orb preview-orb--3"></div>
+                                <div class="preview-orb preview-orb--4"></div>
+                            </div>
+                            
+                            <!-- Card con backdrop-filter -->
+                            <div class="preview-card" id="previewCard">
+                                <h4 class="preview-card__title">Glassmorphism Card</h4>
+                                <p class="preview-card__text">
+                                    Este panel usa backdrop-filter para crear el efecto 
+                                    de vidrio esmerilado sobre el fondo colorido.
+                                </p>
+                                <div class="preview-card__footer">
+                                    <span class="preview-card__tag">CSS Puro</span>
+                                    <span class="preview-card__tag">Sin JS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Galería de Efectos -->
+            <section class="effects-gallery" aria-labelledby="effects-title">
+                <h2 id="effects-title" class="section-title">
+                    Galería de Efectos
+                    <span class="section-subtitle">Estilos predefinidos listos para usar</span>
+                </h2>
+
+                <div class="effects-grid">
+                    <!-- Classic Glass -->
+                    <article class="effect-card effect-card--glass">
+                        <div class="effect-card__preview">
+                            <div class="effect-card__content">
+                                <h3 class="effect-card__title">Classic Glass</h3>
+                                <p class="effect-card__desc">El glassmorphism estándar</p>
+                            </div>
+                        </div>
+                        <code class="effect-card__code">blur(10px) + rgba(255,255,255,0.2)</code>
+                    </article>
+
+                    <!-- Frosted -->
+                    <article class="effect-card effect-card--frost">
+                        <div class="effect-card__preview">
+                            <div class="effect-card__content">
+                                <h3 class="effect-card__title">Frosted</h3>
+                                <p class="effect-card__desc">Blur intenso tipo iOS</p>
+                            </div>
+                        </div>
+                        <code class="effect-card__code">blur(20px) + rgba(255,255,255,0.3)</code>
+                    </article>
+
+                    <!-- Dark Glass -->
+                    <article class="effect-card effect-card--dark">
+                        <div class="effect-card__preview">
+                            <div class="effect-card__content">
+                                <h3 class="effect-card__title">Dark Glass</h3>
+                                <p class="effect-card__desc">Elegante modo oscuro</p>
+                            </div>
+                        </div>
+                        <code class="effect-card__code">blur(15px) + rgba(0,0,0,0.4)</code>
+                    </article>
+
+                    <!-- Vibrant -->
+                    <article class="effect-card effect-card--vibrant">
+                        <div class="effect-card__preview">
+                            <div class="effect-card__content">
+                                <h3 class="effect-card__title">Vibrant</h3>
+                                <p class="effect-card__desc">Colores intensificados</p>
+                            </div>
+                        </div>
+                        <code class="effect-card__code">blur(8px) saturate(180%)</code>
+                    </article>
+
+                    <!-- Muted -->
+                    <article class="effect-card effect-card--muted">
+                        <div class="effect-card__preview">
+                            <div class="effect-card__content">
+                                <h3 class="effect-card__title">Muted</h3>
+                                <p class="effect-card__desc">Suave y desaturado</p>
+                            </div>
+                        </div>
+                        <code class="effect-card__code">blur(12px) saturate(50%)</code>
+                    </article>
+
+                    <!-- Bright -->
+                    <article class="effect-card effect-card--bright">
+                        <div class="effect-card__preview">
+                            <div class="effect-card__content">
+                                <h3 class="effect-card__title">Bright</h3>
+                                <p class="effect-card__desc">Luminoso y aireado</p>
+                            </div>
+                        </div>
+                        <code class="effect-card__code">blur(10px) brightness(120%)</code>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Ejemplos UI Reales -->
+            <section class="ui-examples" aria-labelledby="ui-title">
+                <h2 id="ui-title" class="section-title">
+                    Ejemplos de UI Real
+                    <span class="section-subtitle">Componentes prácticos con backdrop-filter</span>
+                </h2>
+
+                <!-- Ejemplo: Navbar -->
+                <div class="ui-example" id="navbar-example">
+                    <h3 class="ui-example__title">
+                        <span class="ui-example__icon" aria-hidden="true">🧭</span>
+                        Navigation Bar Glassmorphism
+                    </h3>
+                    <p class="ui-example__description">
+                        Header sticky que se vuelve translúcido al hacer scroll, 
+                        manteniendo legibilidad sobre cualquier contenido.
+                    </p>
+                    
+                    <div class="ui-example__demo ui-example__demo--navbar">
+                        <div class="demo-navbar-bg" aria-hidden="true"></div>
+                        <nav class="demo-navbar" role="navigation" aria-label="Ejemplo de navbar">
+                            <div class="demo-navbar__logo">
+                                <span class="demo-navbar__brand">Brand</span>
+                            </div>
+                            <ul class="demo-navbar__menu">
+                                <li><a href="#" class="demo-navbar__link">Inicio</a></li>
+                                <li><a href="#" class="demo-navbar__link">Servicios</a></li>
+                                <li><a href="#" class="demo-navbar__link">Contacto</a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    <div class="ui-example__code">
+                        <pre><code>.navbar {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(10px) saturate(180%);
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Ejemplo: Modal -->
+                <div class="ui-example" id="modal-example">
+                    <h3 class="ui-example__title">
+                        <span class="ui-example__icon" aria-hidden="true">💬</span>
+                        Modal con Overlay Blur
+                    </h3>
+                    <p class="ui-example__description">
+                        Diálogo modal que desenfoca el contenido de fondo, 
+                        centrando la atención en el mensaje importante.
+                    </p>
+                    
+                    <div class="ui-example__demo ui-example__demo--modal">
+                        <div class="demo-modal-content" aria-hidden="true">
+                            <div class="demo-content-line"></div>
+                            <div class="demo-content-line demo-content-line--short"></div>
+                            <div class="demo-content-line"></div>
+                        </div>
+                        <div class="demo-modal-overlay">
+                            <div class="demo-modal" role="dialog" aria-labelledby="modalTitle">
+                                <h4 id="modalTitle" class="demo-modal__title">Confirmar acción</h4>
+                                <p class="demo-modal__text">¿Estás seguro de continuar?</p>
+                                <div class="demo-modal__actions">
+                                    <button type="button" class="demo-modal__btn demo-modal__btn--secondary">Cancelar</button>
+                                    <button type="button" class="demo-modal__btn demo-modal__btn--primary">Confirmar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ui-example__code">
+                        <pre><code>.modal-overlay {
+  position: fixed;
+  inset: 0;
+  backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.5);
+  display: grid;
+  place-items: center;
+}
+
+.modal {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2rem;
+}</code></pre>
+                    </div>
+                </div>
+
+                <!-- Ejemplo: Cards -->
+                <div class="ui-example" id="cards-example">
+                    <h3 class="ui-example__title">
+                        <span class="ui-example__icon" aria-hidden="true">🃏</span>
+                        Cards sobre Imagen
+                    </h3>
+                    <p class="ui-example__description">
+                        Tarjetas informativas superpuestas sobre imágenes de fondo, 
+                        con texto perfectamente legible gracias al blur.
+                    </p>
+                    
+                    <div class="ui-example__demo ui-example__demo--cards">
+                        <div class="demo-cards-bg" aria-hidden="true"></div>
+                        <div class="demo-cards-grid">
+                            <article class="demo-glass-card">
+                                <div class="demo-glass-card__icon" aria-hidden="true">🚀</div>
+                                <h4 class="demo-glass-card__title">Rápido</h4>
+                                <p class="demo-glass-card__text">Performance optimizado para cualquier dispositivo</p>
+                            </article>
+                            <article class="demo-glass-card">
+                                <div class="demo-glass-card__icon" aria-hidden="true">🔒</div>
+                                <h4 class="demo-glass-card__title">Seguro</h4>
+                                <p class="demo-glass-card__text">Protección de datos de nivel empresarial</p>
+                            </article>
+                            <article class="demo-glass-card">
+                                <div class="demo-glass-card__icon" aria-hidden="true">✨</div>
+                                <h4 class="demo-glass-card__title">Elegante</h4>
+                                <p class="demo-glass-card__text">Diseño moderno que impresiona</p>
+                            </article>
+                        </div>
+                    </div>
+
+                    <div class="ui-example__code">
+                        <pre><code>.glass-card {
+  backdrop-filter: blur(16px) saturate(180%);
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+}</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comparación Con/Sin -->
+            <section class="comparison-section" aria-labelledby="comparison-title">
+                <h2 id="comparison-title" class="section-title">
+                    Con vs Sin backdrop-filter
+                    <span class="section-subtitle">La diferencia visual es notable</span>
+                </h2>
+
+                <div class="comparison-grid">
+                    <div class="comparison-column comparison-column--without">
+                        <div class="comparison-header">
+                            <span class="comparison-icon" aria-hidden="true">❌</span>
+                            <h3>Sin backdrop-filter</h3>
+                        </div>
+                        <div class="comparison-demo">
+                            <div class="comparison-bg" aria-hidden="true"></div>
+                            <div class="comparison-card comparison-card--solid">
+                                <h4>Card Tradicional</h4>
+                                <p>Fondo sólido opaco que oculta completamente lo que hay detrás.</p>
+                            </div>
+                        </div>
+                        <ul class="comparison-list">
+                            <li>Fondo completamente opaco</li>
+                            <li>Sin conexión visual con el fondo</li>
+                            <li>Diseño más pesado visualmente</li>
+                            <li>Sin efecto de profundidad</li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-column comparison-column--with">
+                        <div class="comparison-header">
+                            <span class="comparison-icon" aria-hidden="true">✅</span>
+                            <h3>Con backdrop-filter</h3>
+                        </div>
+                        <div class="comparison-demo">
+                            <div class="comparison-bg" aria-hidden="true"></div>
+                            <div class="comparison-card comparison-card--glass">
+                                <h4>Card Glassmorphism</h4>
+                                <p>Efecto de cristal que integra el contenido con el fondo.</p>
+                            </div>
+                        </div>
+                        <ul class="comparison-list">
+                            <li>Transparencia elegante</li>
+                            <li>Integración visual armoniosa</li>
+                            <li>Diseño ligero y moderno</li>
+                            <li>Profundidad y dimensionalidad</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tips de Performance -->
+            <section class="tips-section" aria-labelledby="tips-title">
+                <h2 id="tips-title" class="section-title">
+                    Tips de Performance
+                    <span class="section-subtitle">Usa backdrop-filter de forma eficiente</span>
+                </h2>
+
+                <div class="tips-grid">
+                    <article class="tip-card">
+                        <div class="tip-number" aria-hidden="true">01</div>
+                        <h3 class="tip-title">Limita el área de efecto</h3>
+                        <p class="tip-description">
+                            Aplica backdrop-filter solo en elementos pequeños o medianos. 
+                            Evita usarlo en áreas muy grandes como fondos de página completa.
+                        </p>
+                        <code class="tip-code">/* ✅ Bien */ .card { ... }</code>
+                        <code class="tip-code">/* ❌ Evitar */ body { ... }</code>
+                    </article>
+
+                    <article class="tip-card">
+                        <div class="tip-number" aria-hidden="true">02</div>
+                        <h3 class="tip-title">Usa contain para aislar</h3>
+                        <p class="tip-description">
+                            La propiedad <code>contain</code> ayuda al navegador a optimizar 
+                            el renderizado limitando el área de recálculo.
+                        </p>
+                        <code class="tip-code">contain: layout paint;</code>
+                    </article>
+
+                    <article class="tip-card">
+                        <div class="tip-number" aria-hidden="true">03</div>
+                        <h3 class="tip-title">Evita animaciones constantes</h3>
+                        <p class="tip-description">
+                            No animes el valor de backdrop-filter continuamente. 
+                            Si necesitas transiciones, hazlas cortas y puntuales.
+                        </p>
+                        <code class="tip-code">transition: backdrop-filter 0.3s;</code>
+                    </article>
+
+                    <article class="tip-card">
+                        <div class="tip-number" aria-hidden="true">04</div>
+                        <h3 class="tip-title">Proporciona fallbacks</h3>
+                        <p class="tip-description">
+                            Usa <code>@supports</code> para ofrecer una alternativa 
+                            en navegadores antiguos o dispositivos de bajo rendimiento.
+                        </p>
+                        <code class="tip-code">@supports (backdrop-filter: blur(1px))</code>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Soporte de Navegadores -->
+            <section class="support-section" aria-labelledby="support-title">
+                <h2 id="support-title" class="section-title">
+                    Soporte de Navegadores
+                    <span class="section-subtitle">Amplia compatibilidad en navegadores modernos</span>
+                </h2>
+
+                <div class="browser-support">
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon" aria-hidden="true">🌐</div>
+                        <div class="browser-info">
+                            <strong>Chrome</strong>
+                            <span>76+ ✅</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon" aria-hidden="true">🦊</div>
+                        <div class="browser-info">
+                            <strong>Firefox</strong>
+                            <span>103+ ✅</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon" aria-hidden="true">🧭</div>
+                        <div class="browser-info">
+                            <strong>Safari</strong>
+                            <span>9+ ✅ (prefijo)</span>
+                        </div>
+                    </div>
+                    <div class="browser-item browser-item--supported">
+                        <div class="browser-icon" aria-hidden="true">🔷</div>
+                        <div class="browser-info">
+                            <strong>Edge</strong>
+                            <span>79+ ✅</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="support-note">
+                    <h3>Fallback Recomendado</h3>
+                    <pre class="code-content"><code>/* Fallback para navegadores sin soporte */
+.glass-element {
+  /* Fallback: fondo semi-opaco */
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Si soporta backdrop-filter, usarlo */
+@supports (backdrop-filter: blur(10px)) {
+  .glass-element {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Safari */
+  }
+}</code></pre>
+                </div>
+            </section>
+
+            <!-- Código de Referencia -->
+            <section class="code-section" aria-labelledby="code-title">
+                <h2 id="code-title" class="section-title">
+                    Código de Referencia
+                    <span class="section-subtitle">Snippets listos para copiar y usar</span>
+                </h2>
+
+                <div class="code-examples">
+                    <article class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">Glassmorphism Básico</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>.glass {
+  /* Efecto de cristal */
+  backdrop-filter: blur(10px) saturate(180%);
+  -webkit-backdrop-filter: blur(10px) saturate(180%);
+  
+  /* Fondo semi-transparente */
+  background: rgba(255, 255, 255, 0.2);
+  
+  /* Borde sutil */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  
+  /* Sombra para profundidad */
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}</code></pre>
+                    </article>
+
+                    <article class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">Todos los Filtros Disponibles</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Filtros individuales */
+backdrop-filter: blur(10px);        /* Desenfoque */
+backdrop-filter: brightness(150%);  /* Brillo */
+backdrop-filter: contrast(120%);    /* Contraste */
+backdrop-filter: grayscale(100%);   /* Escala de grises */
+backdrop-filter: hue-rotate(90deg); /* Rotación de tono */
+backdrop-filter: invert(100%);      /* Invertir colores */
+backdrop-filter: saturate(200%);    /* Saturación */
+backdrop-filter: sepia(100%);       /* Efecto sepia */
+
+/* Combinación de filtros */
+backdrop-filter: blur(10px) saturate(180%) brightness(110%);</code></pre>
+                    </article>
+
+                    <article class="code-block">
+                        <div class="code-header">
+                            <h3 class="code-title">Dark Mode Glassmorphism</h3>
+                            <span class="code-lang">CSS</span>
+                        </div>
+                        <pre class="code-content"><code>/* Light mode */
+.glass-card {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Dark mode */
+[data-theme="dark"] .glass-card {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}</code></pre>
+                    </article>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <div class="footer__logo">
+                        <img 
+                            src="../assets/Logo_MRStudio.webp" 
+                            alt="Miguel Ramos Alarcon"
+                            width="40"
+                            height="40"
+                            loading="lazy"
+                        >
+                    </div>
+                    <div class="footer__info">
+                        <p class="footer__text">
+                            Desarrollado con CSS moderno por 
+                            <strong class="footer__author">Miguel Ramos Alarcon</strong>
+                        </p>
+                        <p class="footer__subtitle">Transformando ideas en experiencias digitales excepcionales</p>
+                    </div>
+                </div>
+                
+                <div class="footer__links">
+                    <a href="https://github.com/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="GitHub de Miguel Ramos Alarcon">
+                        GitHub
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="https://linkedin.com/in/miguelramosalarcon" 
+                       class="footer__link" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       aria-label="LinkedIn de Miguel Ramos Alarcon">
+                        LinkedIn
+                    </a>
+                    <span class="footer__separator" aria-hidden="true">•</span>
+                    <a href="../index.html" 
+                       class="footer__link"
+                       aria-label="Volver al índice principal">
+                        Más Demos
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button 
+        class="back-to-top" 
+        id="backToTop"
+        type="button"
+        aria-label="Volver arriba"
+        title="Volver arriba"
+        hidden
+    >
+        <svg 
+            class="back-to-top__icon" 
+            width="24" 
+            height="24" 
+            viewBox="0 0 24 24" 
+            fill="none" 
+            stroke="currentColor" 
+            stroke-width="2.5" 
+            stroke-linecap="round" 
+            stroke-linejoin="round"
+            aria-hidden="true"
+        >
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+        <svg 
+            class="back-to-top__progress" 
+            viewBox="0 0 100 100"
+            aria-hidden="true"
+        >
+            <circle class="back-to-top__progress-bg" cx="50" cy="50" r="46"/>
+            <circle class="back-to-top__progress-bar" cx="50" cy="50" r="46"/>
+        </svg>
+    </button>
+
+    <!-- Scripts -->
+    <script src="../scripts/theme-toggle.js"></script>
+    <script src="../scripts/back-to-top.js"></script>
+    <script src="../scripts/backdrop-filter.js"></script>
+</body>
+</html>

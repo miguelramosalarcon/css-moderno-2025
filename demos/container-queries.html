@@ -11,6 +11,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/container-queries.css">
+    <link rel="stylesheet" href="../styles/back-to-top.css">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle fill='%232448A6' cx='50' cy='50' r='50'/><path fill='%23F5B841' d='M70 35L55 50L70 65M30 35L45 50L30 65'/></svg>">
@@ -447,10 +448,27 @@
             </div>
         </div>
     </footer>
-
+ <!-- Back to Top Button -->
+    <button 
+        class="back-to-top" 
+        id="backToTop"
+        type="button"
+        aria-label="Volver arriba"
+        title="Volver arriba"
+        hidden
+    >
+        <svg class="back-to-top__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M18 15l-6-6-6 6"/>
+        </svg>
+        <svg class="back-to-top__progress" viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="back-to-top__progress-bg" cx="50" cy="50" r="46"/>
+            <circle class="back-to-top__progress-bar" cx="50" cy="50" r="46"/>
+        </svg>
+    </button>
     <!-- Scripts -->
     <script src="../scripts/utils.js"></script>
     <script src="../scripts/theme-toggle.js"></script>
     <script src="../scripts/container-queries.js"></script>
+    <script src="../scripts/back-to-top.js"></script>
 </body>
 </html>
